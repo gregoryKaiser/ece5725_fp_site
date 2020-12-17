@@ -83,9 +83,9 @@
           <h2>Project Objective:</h2>
           <p style="text-align: left;padding: 0px 30px;">
             The objective of "It's Dangerous To Go Alone" is to demonstrate an interactive adventure game which requires 
-            one to obtain items through the detection of real objects using a Raspberry Pi camera. Additionally, we sought to demonstrate
-            a remote connection for two Raspberry Pi's to communicate, allowing for a fun game to be played during social distancing in 2020. 
-            Additionally, we wanted to exercise our object-oriented programming to develop a starting point for future game level design and feature
+            one to obtain items through the detection of real objects using a Raspberry Pi (RPi) camera. Additionally, we sought to demonstrate
+            a remote connection for two Raspberry Pi's to communicate, allowing for a fun game to be played while social distancing in 2020. 
+            Additionally, we wanted to exercise our object-oriented programming skills to develop a starting point for future game level design and feature
             additions.
           </p>
           </div>
@@ -95,7 +95,12 @@
       <div style="text-align:center;">
               <h2>Introduction</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                This is the introduction.
+                Playing adventure games is a lot of fun, especially when the world is so absorbing that one gets lost in the universe's rules and quirky limitations.
+                From the touchscreen of the original Nintendo DS, to the motion-controls of the Wii platform, however, there are a number of examples of novel user 
+                input that demonstrate its utility and potential for better user engagement. Along these lines, we wanted items in our game to be acquired by finding similar
+                items in real life that are recognized by a camera system. Thanks to recent developments in image processing and machine learning, we can use a lightweight 
+                object detection model to pick up on a limited set of real objects, and then spawn them for use by the character. We also attempted to make this project multiplayer 
+                by trying a few methods of data transfer over our home networks.
               </p>
       </div>
 
@@ -106,6 +111,12 @@
                 Our design for this project occurred mostly in software, where we tried to make an expandable platform for generic level creation.
                 Some changes were made in order to ensure that the camera was oriented correctly in-game, but we otherwise had very little trouble interfacing
                 with the camera module.
+              </p>
+              <h3>Hardware</h3>
+              <p style="text-align: left;padding: 0px 30px;">
+                Though we originally had aspirations for a more interesting hardware setup, the end-product consists of only a RPi and camera module. The camera's 
+                ribbon cable is wrapped around the body of the RPi case and is mounted to its underside. The device is held in both hands, in a portrait orientation 
+                with the piTFT buttons on the right.
               </p>
               <h3>PyGame and Class Design</h3>
               <p style="text-align: left;padding: 0px 30px;">
@@ -121,11 +132,11 @@
                 triggering callback functions that call the character's movement member functions. These buttons are denoted by icons displayed next to them
                 on-screen. The RPi.GPIO library is used to connect these buttons to their
                 functionality, and they are triggered using both the rising and falling edge of the button signal. This way, when the button is pressed down, the
-                character moves in one direction, and when it is released, the character is halted. By tapping on the touchscreen, the character jumps in the air.
+                character moves in one direction, and when it is released, the character is halted. By tapping on the touchscreen, the character jumps in the air. 
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 Another piTFT button is used to trigger a callback function that switches control to the camera on the back of the device. This changes the game state to 
-                detect object for the user to acquire in-game. The final button on the "top" of the piTFT (closest to the power source) is a simple quit button to allow the user to 
+                detect objects for the user to acquire in-game. The final button on the "top" of the piTFT (closest to the power source) is a simple quit button to allow the user to 
                 end the game entirely.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
@@ -146,6 +157,7 @@
                 a script provided by the tutorial. In order to test the object detection itself, the github repository has example scripts which can confirm that the necessary pieces
                 are in place and working properly.
               </p>
+              
               <h4>Wheezy downgrade</h4>
               <p style="text-align: left;padding: 0px 30px;">
                 Because the update mentioned above causes issues when using pygame to control the piTFT, the downgrade performed in Lab 2 of ECE 5725 is repeated.
@@ -289,15 +301,21 @@
     <div class="row" style="text-align:center;">
           <h2>Work Distribution</h2>
           <div style="text-align:center;">
-              <img class="img-rounded" src="pics/group.jpg" alt="Generic placeholder image" style="width:80%;">
-              <h4>Project group picture</h4>
+              <img class="img-rounded" src="pics/group_photo.jpg" alt="Generic placeholder image" style="width:80%;">
+              <h4>Group picture of Caeli and Greg.</h4>
+              <p>
+                All synchronous work was done over zoom using other collaboration tools like the Live Share feature of VS Code as well as github and Google Drive.<br><br>
+                <b>Group responsibilities:</b>
+                  <li>Class design and member function tweaking.</li>
+                  <li>Image asset collection.</li>
+              </p>
           </div>
           <div class="col-md-6" style="font-size:16px">
               <img class="img-rounded" src="pics/a.png" alt="Generic placeholder image" width="240" height="240">
-              <h3>Rick</h3>
-              <p class="lead">netid@cornell.edu</p>
+              <h3>Caeli MacLennan</h3>
+              <p class="lead">cam476@cornell.edu</p>
               <p>
-                Designed the overall software architecture (Just being himself).
+                [describe contributions in paragraphical or list form]
               </p>
           </div>
           <div class="col-md-6" style="font-size:16px">
@@ -305,9 +323,12 @@
               <h3>Gregory Kaiser</h3>
               <p class="lead">ghk48@cornell.edu</p>
               <p>
-                <ul>
-                  <li></li>
-                </ul>
+                <li>Designed the state machine and menu cycle.</li>
+                <li>Confirmed TFLite capabilities and integrated them into game logic.</li>
+                <li>Adapted TFLite to run on the piTFT, and designed item spawning logic (checking for detected objects).</li>
+                <li>Attempted to host a web server on the class server using ssh commands (Attempt 2).</li>
+                <li>Wrote desktop_server.py, desktop_client.py, and rpi_client.py to establish object transfer over local network (Attempt 3).</li>
+                <li>Edited demonstration video.</li>
               </p>
           </div>
       </div>
@@ -348,6 +369,10 @@ int main(){
 
     </div><!-- /.container -->
 
+    <!-- <figure>
+      <img class="img-rounded" src="pics/greg_pic.png" alt="Headshot of Greg" width="240" height="240">
+      <figcaption>hello</figcaption>
+    </figure> -->
 
 
 
