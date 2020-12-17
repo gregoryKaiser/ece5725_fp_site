@@ -83,10 +83,9 @@
           <h2>Project Objective:</h2>
           <p style="text-align: left;padding: 0px 30px;">
             The objective of "It's Dangerous To Go Alone" is to demonstrate an interactive adventure game which requires 
-            one to obtain items through the detection of real objects using a Raspberry Pi (RPi) camera. Additionally, we sought to demonstrate
+            one to obtain items through the detection of real objects using a Raspberry Pi (RPi) camera. We wanted to exercise our object-oriented programming skills to develop a starting point for future game level design and feature
+            additions. Additionally, we sought to demonstrate
             a remote connection for two Raspberry Pi's to communicate, allowing for a fun game to be played while social distancing in 2020. 
-            Additionally, we wanted to exercise our object-oriented programming skills to develop a starting point for future game level design and feature
-            additions.
           </p>
           </div>
       </div>
@@ -99,8 +98,7 @@
                 From the touchscreen of the original Nintendo DS, to the motion-controls of the Wii platform, however, there are a number of examples of novel user 
                 input that demonstrate its utility and potential for better user engagement. Along these lines, we wanted items in our game to be acquired by finding similar
                 items in real life that are recognized by a camera system. Thanks to recent developments in image processing and machine learning, we can use a lightweight 
-                object detection model to pick up on a limited set of real objects, and then spawn them for use by the character. We also attempted to make this project multiplayer 
-                by trying a few methods of data transfer over our home networks.
+                object detection model to pick up on a limited set of real objects, and then spawn them for use by the character. We also attempted to make this project multiplayer by trying a few methods of data transfer over our home networks.
               </p>
       </div>
 
@@ -114,79 +112,187 @@
               </p>
               <h3>Hardware</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                Though we originally had aspirations for a more interesting hardware setup, the end-product consists of only a RPi and camera module. The camera's 
+                Though we originally had aspirations for a more interesting hardware setup, the end-product consists of just a RPi and camera module. The camera's 
                 ribbon cable is wrapped around the body of the RPi case and is mounted to its underside. The device is held in both hands, in a portrait orientation 
-                with the piTFT buttons on the right.
+                with the piTFT buttons on the right side.
               </p>
               <h3>PyGame and Class Design</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Object types and functionality</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
+              <hr id='userinput'>
               <h4>User input</h4>
               <p style="text-align: left;padding: 0px 30px;">
                 The piTFT provides the full user interface for a player. Two of the buttons are used for moving the character right and left, by 
                 triggering callback functions that call the character's movement member functions. These buttons are denoted by icons displayed next to them
-                on-screen. The RPi.GPIO library is used to connect these buttons to their
+                on-screen. 
+              </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">move_hero_left</span>(channel):
+    <span style="color: #008800; font-weight: bold">global</span> hero
+    <span style="color: #008800; font-weight: bold">global</span> move_l_toggle
+    <span style="color: #008800; font-weight: bold">if</span> move_l_toggle <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+        move_l_toggle <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        hero<span style="color: #333333">.</span>moveLeft()
+    <span style="color: #008800; font-weight: bold">else</span>:
+        move_l_toggle <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+        hero<span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">move_hero_right</span>(channel):
+    <span style="color: #008800; font-weight: bold">global</span> hero
+    <span style="color: #008800; font-weight: bold">global</span> move_r_toggle
+    <span style="color: #008800; font-weight: bold">if</span> move_r_toggle <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+        move_r_toggle <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        hero<span style="color: #333333">.</span>moveRight()
+    <span style="color: #008800; font-weight: bold">else</span>:
+        move_r_toggle <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+        hero<span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+
+GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0000DD; font-weight: bold">23</span>, GPIO<span style="color: #333333">.</span>BOTH, callback<span style="color: #333333">=</span>move_hero_left, bouncetime<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">100</span>)
+GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0000DD; font-weight: bold">27</span>, GPIO<span style="color: #333333">.</span>BOTH, callback<span style="color: #333333">=</span>move_hero_right, bouncetime<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">100</span>)
+</pre></div>
+<br>
+              <p style="text-align: left;padding: 0px 30px;">  
+                The RPi.GPIO library is used to connect these buttons to their
                 functionality, and they are triggered using both the rising and falling edge of the button signal. This way, when the button is pressed down, the
-                character moves in one direction, and when it is released, the character is halted. By tapping on the touchscreen, the character jumps in the air. 
+                character moves in one direction, and when it is released, the character is halted. By tapping on the touchscreen, the character jumps in the air. This function is controlled through the main game logic where the touch event is detected through polling.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 Another piTFT button is used to trigger a callback function that switches control to the camera on the back of the device. This changes the game state to 
-                detect objects for the user to acquire in-game. The final button on the "top" of the piTFT (closest to the power source) is a simple quit button to allow the user to 
-                end the game entirely.
+                detect objects for the user to acquire in-game. The final button on the "top" of the piTFT (closest to the power source) is a simple quit button to allow the user to end the game entirely.
               </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">switch_state</span>(channel):
+    <span style="color: #008800; font-weight: bold">global</span> GAME_STATE
+    <span style="color: #008800; font-weight: bold">global</span> GAME_PLAY
+    <span style="color: #008800; font-weight: bold">global</span> OBJ_DETECT
+    <span style="color: #008800; font-weight: bold">global</span> obj_capture
+    <span style="color: #008800; font-weight: bold">if</span> GAME_STATE<span style="color: #333333">==</span>GAME_PLAY:
+        GAME_STATE <span style="color: #333333">=</span> OBJ_DETECT
+    <span style="color: #008800; font-weight: bold">elif</span> GAME_STATE<span style="color: #333333">==</span>OBJ_DETECT:
+        GAME_STATE <span style="color: #333333">=</span> GAME_PLAY
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #000000; font-weight: bold">not</span> obj_capture<span style="color: #333333">==</span><span style="background-color: #fff0f0">&quot;none&quot;</span>):
+            drop_item_noncb() <span style="color: #888888">#spawn an object</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">quit_game</span>(channel):
+    <span style="color: #008800; font-weight: bold">global</span> run
+    run <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+
+GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0000DD; font-weight: bold">22</span>, GPIO<span style="color: #333333">.</span>FALLING, callback <span style="color: #333333">=</span> switch_state, bouncetime<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">100</span>)
+GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0000DD; font-weight: bold">17</span>, GPIO<span style="color: #333333">.</span>FALLING, callback<span style="color: #333333">=</span>quit_game, bouncetime<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">100</span>)
+</pre></div>
+<br>
               <p style="text-align: left;padding: 0px 30px;">
                 Of course, the player is also responsible for finding items in real life for the game to detect, and experimenting to find our limited set of detectable objects.
               </p>
               <h4>Collision logic</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h3>Object Detection with TensorFlow-Lite</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                Objects are detected using TensorFlow-Lite by following closely a tutorial from [name and link]. 
+                Objects are detected using TensorFlow-Lite by following closely a tutorial from <a href="https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Raspberry_Pi_Guide.md#part-1---how-to-set-up-and-run-tensorflow-lite-object-detection-models-on-the-raspberry-pi" target="_blank">EdjeElectronics</a>. TensorFlow can be used for a lot of different machine learning tasks, and can be trained for this specific application of object detection from a RPi using an attached camera. Because this kind of process is computationally intensive, a more mobile and IoT-friendly version called <a href="https://www.tensorflow.org/lite" target="_blank">TensorFlow Lite</a> is used.
               </p>
               <h4>Tutorial-based setup</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                In this tutorial, the Raspberry Pi is first updated in order to run the appropriate testing scripts.
-                In order not to cause conflicts between the packages required by TensorFlow-Lite and the Raspberry Pi, a virtual environment is set up and then the required libraries are acquired through 
-                a script provided by the tutorial. In order to test the object detection itself, the github repository has example scripts which can confirm that the necessary pieces
-                are in place and working properly.
+                In this <a href="https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Raspberry_Pi_Guide.md#part-1---how-to-set-up-and-run-tensorflow-lite-object-detection-models-on-the-raspberry-pi" target="_blank">tutorial</a>, the Raspberry Pi is first updated in order to run the appropriate testing scripts.
               </p>
-              
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo apt-get update</span>
+<span style="color: #888888">sudo apt-get dist-upgrade</span>
+</pre></div><br>
+
+              <p style="text-align: left;padding: 0px 30px;">
+                One can then either clone our repository, or follow the tutorial instructions to acquire the necessary files for the next steps. In order to test the object detection itself, the tutorial github repository has example scripts which can confirm that the necessary pieces
+                are in place and working properly.<br><br>
+                First, a virtual environment is set up to separate potential package conflicts between the RPi and the libraries required for TFLite. These required dependencies are then acquired through a script provided by the tutorial. From inside the cloned repository (whichever was chosen), the following is executed:
+              </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo pip3 install virtualenv</span>
+<span style="color: #888888">sudo python3 -m venv tflite1-env</span>
+<span style="color: #888888">source tflite1-env/bin/activate</span>
+<span style="color: #888888">sudo bash get_pi_requirements.sh</span>
+</pre></div><br>
+
+              <p style="text-align: left;padding: 0px 30px;">
+                Be sure that the virtual environment is activated before running the bash script by noticing that <code>(tflite1-env)</code> now appears before the username in the terminal, like this: <code>(tflite1-env) pi@ghk48-cam476:~/git/ece5725_fp $</code>. A pre-trained model with a number of common detectable objects is used by our script, which can either be downloaded by cloning our repository, or issuing the following:
+              </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">wget https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip</span>
+<span style="color: #888888">unzip coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip -d Sample_TFLite_model</span>
+</pre></div><br>
+
               <h4>Wheezy downgrade</h4>
               <p style="text-align: left;padding: 0px 30px;">
                 Because the update mentioned above causes issues when using pygame to control the piTFT, the downgrade performed in Lab 2 of ECE 5725 is repeated.
-                [condensed wheezy downgrade explanation] 
+                [condensed wheezy downgrade explanation??] <br><br>
+                Once the necessary file changes are made, the wheezy downgrade can be installed.
+              </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo apt-get update</span>
+<span style="color: #888888">sudo apt-get –y –-allow-downgrades install libsdl1.2debian/wheezy</span>
+</pre></div><br>
+              <p style="text-align: left;padding: 0px 30px;">
+                Now that all of the necessary parts are in place, once can attempt to run the single-player script. If additional libraries are missing, either try downloading them individually, or running the <code>get_pi_requirements.sh</code> script again. Sometimes that particular script will fail to download everything on the first try. The game itself is run with the following command:
+              </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo python3 game_and_detect_update.py --modeldir=Sample_TFLite_model --resolution=240x320</span>
+</pre></div><br>
+              <p style="text-align: left;padding: 0px 30px;">
+                The <code>modeldir</code> argument points the script to the object detection model that one is using. The tutorial that we followed separated this from the main script such that custom models could be generated and stored in separate folders. This makes the system more modular, in case custom image-detection is developed. The <code>resolution</code> argument gives the resolution of the piTFT to the object detection script so that the camera image is scaled to fill the correct dimensions of the screen. These coordinates are also flipped (from 320x240) to compensate for the rotation of the camera before display, described in the section below.
               </p>
               <h4>Adapted to run on the piTFT screen</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                The object detection section of our game is the same as the tutorial script, with a few minor changes. One of the main changes is to switch from using the cv2 library 
-                to display camera output to the Raspberry Pi desktop, to using pygame to display to the piTFT. In order to do this, we found a great resource from a past student project 
-                which used the cv2 library to write to a temporary file, which is then read back in and displayed in the usual pygame fashion by blitting ot the display surface and updating
-                periodically.
+                The object detection section of our game is nearly identical to the tutorial script called <code>TFLite_detection_webcam.py</code>, with a few changes. One of the main changes is to switch from using the <code>cv2</code> library to display camera output, to using pygame to display to the piTFT. In order to do this, we found a great resource from a past <a href="https://courses.ece.cornell.edu/ece5990/ECE5990_Fall15_FinalProjects/Andre_Heil/ece5990_final_report/avh34_jr986.html" target="_blank">ECE 5990 student project</a> for a face-recognition system. They used the cv2 library to write to a temporary file, which is then read back in and displayed in the usual pygame fashion by blitting to the display surface and updating periodically. The frame itself is also rotated 90 degrees to match the orientation of the camera since it is wrapped around the side, instead of the top, of our RPi console.
               </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#rotate to align with our setup</span>
+frame <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>rotate(frame, cv2<span style="color: #333333">.</span>cv2<span style="color: #333333">.</span>ROTATE_90_COUNTERCLOCKWISE)
+
+<span style="color: #888888">#ghk48: write to temp file so pygame can read and display</span>
+cv2<span style="color: #333333">.</span>imwrite(<span style="background-color: #fff0f0">&#39;./tmp.bmp&#39;</span>, frame) <span style="color: #888888">#write frame</span>
+img <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="background-color: #fff0f0">&#39;./tmp.bmp&#39;</span>) <span style="color: #888888">#read frame</span>
+win<span style="color: #333333">.</span>fill((<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>)) <span style="color: #888888">#clear screen</span>
+win<span style="color: #333333">.</span>blit(img, (<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>)) <span style="color: #888888">#add frame</span>
+pygame<span style="color: #333333">.</span>display<span style="color: #333333">.</span>update()
+</pre></div><br>
               <p style="text-align: left;padding: 0px 30px;">
-                The other major change is the capture of a single label from every frame during detection, and storing it in a global variable for use in-game once control 
-                is handed back to the player. By gating for just the first label in the list of detectable objects which meets a minimum detection threshold, it is recommended that the 
-                user try to have only a singel type of object detected in-frame when the game state is switched back to the character-controlled screen. When control returns, the detected 
-                object is compared to the labels stored in three lists: one to acquire armor in the game, one for the weapon, and one for the apple. If the detected label is in one of 
-                these lists, an item is spawned in game with the appropriate characteristics and image asset.  
+                The other major change is the capture of a single label from every frame during detection, and storing it in a global variable (<code>obj_capture</code>) for use in-game once control 
+                is handed back to the player. By gating for just the first label in the list of detected objects (<code>classes_obj[0]</code>) which meets a minimum detection threshold, it is recommended that the user try to have only a single type of object detected in-frame when the game state is switched back to the character-controlled screen. When control returns (see <code>switch_state</code> under <a href="#userinput">User input</a>), the detected object is compared to the labels stored in three lists: one to acquire armor in the game, one for the weapon, and one for the apple. If the detected label is in one of these lists, an item is spawned in game with the appropriate characteristics and image asset. 
               </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">if</span> (<span style="color: #007020">len</span>(scores)<span style="color: #333333">&gt;</span><span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> (scores[<span style="color: #0000DD; font-weight: bold">0</span>]<span style="color: #333333">&gt;</span>min_conf_threshold)):
+    obj_capture <span style="color: #333333">=</span> labels[<span style="color: #007020">int</span>(classes_obj[<span style="color: #0000DD; font-weight: bold">0</span>])]
+<span style="color: #008800; font-weight: bold">else</span>:
+    obj_capture <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;none&quot;</span>
+</pre></div><br>
               <p style="text-align: left;padding: 0px 30px;">
-                Because the object detection is based on a pre-trained model, the potentially detected labels are contained in a text file listing inside the folder <code>Sample_TF_Lite_model</code>. 
-                For the apple object to spawn, an "apple", "banana", or "orange" must be in-frame and detected. For a piece of armor, an "umbrella", "tie", or "backpack", will do. 
-                Finally, in order to get a knife in the game, a "knife" or "scissors" must be visible and detected. These were the most appropriate labels that the model was already
-                trained upon, so the player must find these objects through trial and error. While it takes time, training one's own custom model is also possible, and is explained by [name] 
-                in their very informative tutorial.
+                Because the object detection is based on a pre-trained model, the potentially detected labels are contained in a text file listing inside the folder <code>Sample_TF_Lite_model</code>. For the apple object to spawn, an "apple", "banana", or "orange" must be in-frame and detected. For a piece of armor, an "umbrella", "tie", or "backpack", will do. Finally, in order to get a knife in the game, a "knife" or "scissors" must be visible and detected. 
+              </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#recognizable objects taken from &quot;lablemap.txt&quot; in Sample_TFLite_model</span>
+recog_knife <span style="color: #333333">=</span> [<span style="background-color: #fff0f0">&quot;knife&quot;</span>, <span style="background-color: #fff0f0">&quot;scissors&quot;</span>]
+recog_fruit <span style="color: #333333">=</span> [<span style="background-color: #fff0f0">&quot;apple&quot;</span>,<span style="background-color: #fff0f0">&quot;banana&quot;</span>,<span style="background-color: #fff0f0">&quot;orange&quot;</span>]
+recog_armor <span style="color: #333333">=</span> [<span style="background-color: #fff0f0">&quot;umbrella&quot;</span>,<span style="background-color: #fff0f0">&quot;backpack&quot;</span>,<span style="background-color: #fff0f0">&quot;tie&quot;</span>]
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">drop_item_noncb</span>():
+    <span style="color: #008800; font-weight: bold">global</span> all_objects
+    <span style="color: #008800; font-weight: bold">global</span> disp_objects
+    <span style="color: #008800; font-weight: bold">global</span> obj_capture
+    <span style="color: #008800; font-weight: bold">if</span>(obj_capture <span style="color: #000000; font-weight: bold">in</span> recog_knife):
+        knife <span style="color: #333333">=</span> classes<span style="color: #333333">.</span>weapon(knife_im_l, knife_im, <span style="background-color: #fff0f0">&quot;knife&quot;</span>, <span style="color: #0000DD; font-weight: bold">310</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">310</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">30</span>, <span style="color: #0000DD; font-weight: bold">30</span>, <span style="color: #007020">True</span>, <span style="color: #0000DD; font-weight: bold">10</span>) <span style="color: #888888">#new item</span>
+        knife<span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #888888">#thrown in</span>
+        disp_objects<span style="color: #333333">.</span>append(knife) <span style="color: #888888">#add to screen</span>
+    <span style="color: #008800; font-weight: bold">elif</span>(obj_capture <span style="color: #000000; font-weight: bold">in</span> recog_fruit):
+        apple <span style="color: #333333">=</span> classes<span style="color: #333333">.</span>item(apple_im, <span style="background-color: #fff0f0">&quot;apple&quot;</span>, <span style="color: #0000DD; font-weight: bold">310</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">310</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">30</span>, <span style="color: #0000DD; font-weight: bold">30</span>, <span style="color: #007020">False</span>) <span style="color: #888888">#new item</span>
+        apple<span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #888888">#thrown in</span>
+        disp_objects<span style="color: #333333">.</span>append(apple) <span style="color: #888888">#add to screen</span>
+    <span style="color: #008800; font-weight: bold">elif</span>(obj_capture <span style="color: #000000; font-weight: bold">in</span> recog_armor):
+        shirt <span style="color: #333333">=</span> classes<span style="color: #333333">.</span>armor(armor_im, <span style="background-color: #fff0f0">&quot;armor&quot;</span>, <span style="color: #0000DD; font-weight: bold">310</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">310</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #007020">True</span>, <span style="color: #0000DD; font-weight: bold">10</span>, <span style="background-color: #fff0f0">&quot;cold&quot;</span>, <span style="background-color: #fff0f0">&quot;torso&quot;</span>) <span style="color: #888888">#new item</span>
+        shirt<span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #888888">#thrown in</span>
+        disp_objects<span style="color: #333333">.</span>append(shirt) <span style="color: #888888">#add to screen</span>
+</pre></div><br>
+
+              <p style="text-align: left;padding: 0px 30px;">
+                These were the most appropriate labels that the model was already trained upon, so the player must find these objects through trial and error. While it takes time, training one's own custom model is also possible, and is explained by <a href="https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Raspberry_Pi_Guide.md#part-1---how-to-set-up-and-run-tensorflow-lite-object-detection-models-on-the-raspberry-pi" target="_blank">EdjeElectronics</a> in their very informative tutorial.
               </p>
               <h3>Main game logic and structure</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                [explanation of classes.py and game_and_detect_update.py and how things are structured in the main source code]
+                [TODO][explanation of classes.py and game_and_detect_update.py and how things are structured in the main source code]
               </p>
               <h4>Game state-machine</h4>
               <p style="text-align: left;padding: 0px 30px;">
@@ -200,19 +306,19 @@
               </p>
               <h3>Remote Connection Attempts</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Attempt 1: Opening a port on a home network</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Attempt 2: Host a server on a port on the class server</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Attempt 3: Package and send data locally to demonstrate intent</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
       </div>
 
@@ -220,7 +326,7 @@
       <div style="text-align:center;">
               <h2>Drawings</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                This is the drawings section.
+                [TODO]This is the drawings section.
               </p>
       </div>
 
@@ -228,19 +334,19 @@
       <div style="text-align:center;">
               <h2>Testing</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                This is the testing section. Mention vs code workflow here as well
+                [TODO]This is the testing section. Mention vs code workflow here as well
               </p>
               <h3>Gravity and Drag and Collisions</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h3>Camera and well-detected objects</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h3>Multiplayer testing/debugging</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
       </div>
 
@@ -248,7 +354,7 @@
       <div style="text-align:center;">
               <h2>Result</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                This is the results section. 
+                [TODO]This is the results section. 
               </p>
       </div>
 
@@ -256,7 +362,7 @@
       <div style="text-align:center;">
               <h2>Conclusion</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                This is the conclusion section.
+                [TODO]This is the conclusion section.
               </p>
       </div>
 
@@ -264,35 +370,35 @@
       <div style="text-align:center;">
               <h2>Future Work</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                This is the future work section.
+                [TODO]This is the future work section.
               </p>
               <h3>Expanding the game</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Camera movement</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Multiple levels/environments</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Enemies and other moving assets</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Custom TensorFlow-Lite model</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h4>Menu Screen, Game Score, and Inventory Access</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
               <h3>Extension to multiplayer</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                
+                [TODO]
               </p>
       </div>
 
@@ -324,7 +430,7 @@
               <p class="lead">ghk48@cornell.edu</p>
               <p>
                 <li>Designed the state machine and menu cycle.</li>
-                <li>Confirmed TFLite capabilities and integrated them into game logic.</li>
+                <li>Developed and tested TFLite capabilities and integrated them into game logic.</li>
                 <li>Adapted TFLite to run on the piTFT, and designed item spawning logic (checking for detected objects).</li>
                 <li>Attempted to host a web server on the class server using ssh commands (Attempt 2).</li>
                 <li>Wrote desktop_server.py, desktop_client.py, and rpi_client.py to establish object transfer over local network (Attempt 3).</li>
@@ -335,7 +441,7 @@
 
     <hr>
       <div style="font-size:18px">
-          <h2>Parts List</h2>
+          <h2>Parts List</h2>[TODO]
           <ul>
               <li>Raspberry Pi $35.00</li>
               <li>Raspberry Pi Camera V2 $25.00</li>
@@ -346,7 +452,7 @@
       </div>
       <hr>
       <div style="font-size:18px">
-          <h2>References</h2>
+          <h2>References</h2>[TODO]
           <a href="https://picamera.readthedocs.io/">PiCamera Document</a><br>
           <a href="http://www.micropik.com/PDF/SG90Servo.pdf">Tower Pro Servo Datasheet</a><br>
           <a href="http://getbootstrap.com/">Bootstrap</a><br>
@@ -358,7 +464,7 @@
     <hr>
 
       <div class="row">
-              <h2>Code Appendix</h2>
+              <h2>Code Appendix</h2>[TODO]
               <pre><code>
 // Hello World.c
 int main(){
