@@ -362,17 +362,21 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <p style="text-align: left;padding: 0px 30px;">
                 We also attempted to host a server on one RPi through the class server by opening a reverse ssh tunnel. First, we ran the following command in the terminal of either our laptop or the first RPi:
               </p>
-
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssh -R 1000:localhost:4000 <span style="color: #333333">[</span>netid<span style="color: #333333">]</span>@132.236.79.205
+</pre></div><br>
               <p style="text-align: left;padding: 0px 30px;">
-                This opens a connection between port [] on the device that issued the command, and opens port [] on the class server. To check that this connection is open and correct, Anthony Ngoma, a generous classmate, provided the following command which lists open ports on the class server:
+                This opens a connection between port 4000 on the device that issued the command, and opens port 1000 on the class server. To check that this connection is open and correct, Anthony Ngoma, a generous classmate, provided the following command which lists open ports on the class server:
               </p>
-
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">netstat -tulpn 
+</pre></div><br>
               <p style="text-align: left;padding: 0px 30px;">
-                Once that open port was confirmed, we attempted to use the -L option of the ssh command to open a connection to a second device, this time from port [] on the second device, to the now open port [] on the class server:
+                Once the creation of that open port was confirmed, we attempted to use the -L option of the ssh command to open a connection to a second device, this time from port 2000 on the second device, to the now open port 1000 on the class server:
               </p>
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssh -L 2000:localhost:1000 <span style="color: #333333">[</span>othernetid<span style="color: #333333">]</span>@132.236.79.205
+</pre></div><br>
 
               <p style="text-align: left;padding: 0px 30px;">
-                However, no matter which ports we chose, which devices we tried to connect (even trying to connect a device to itself), nor what order of operations these commands followed, we were unable to establish a connection over the class server in this manner. Usually, the connection was rejected, giving us suspicion that the IP address or port numbers were incorrect. Sometimes, the connection merely timed out, indicating to us that it is possible our settings were correct, but that for some reason the connection was never fully made.
+                The server script is run on the first device, while the client script is run on the second device. We fed every permutation of IPv4 addresses to the scripts, as well as every port combination that we thought might solve the issue. However, no matter which ports we chose, which devices we tried to connect (even trying to connect a device to itself), nor what order of operations these commands followed, we were unable to establish a connection over the class server in this manner. Usually, the connection was rejected, giving us suspicion that the IP address or port numbers were incorrect. Sometimes, the connection merely timed out, indicating to us that our settings were likely correct, but that for some reason the connection was never fully established.
               </p>
               <h4>Attempt 3: Package and send data locally to demonstrate intent</h4>
               <p style="text-align: left;padding: 0px 30px;">
@@ -482,6 +486,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <p>
                 All synchronous work was done over zoom using other collaboration tools like the Live Share feature of VS Code as well as github and Google Drive. A lot of asynchronous work was done due to scheduling conflicts and the time difference between the east and west Coast<br><br>
                 <b>Group responsibilities:</b>
+                  <li>High level design decisions and division of labor.</li>
                   <li>Class and game logic design.</li>
                   <li>Image asset collection.</li>
               </p>
