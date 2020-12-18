@@ -138,11 +138,47 @@
               </p>
               <h3>PyGame and Class Design</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                For ease of game design and object addition, each object was implemented as a class with uniquely defined member functions for each type of object. 
+                Functions which function on all objects in the same manner were defined below the object classes. 
+                Below is an in-depth description of each function and class.
               </p>
-              <h4>Object types and functionality</h4>
+              <h4>Classes</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                Character 
+                <p style="text-align: left;padding: 0px 40px;">
+                  The character class is meant to store the hero player and give them the ability to make changes upon
+                  their environment, as well as to allow the environment to make changes to the hero. To determine where
+                  to blit the character onto the screen, the character class has an x and y member field, which correspond
+                  to the character's current x and y screen coordinates. To store the character's location relative to the 
+                  game map, the character class also has global_x and global_y member fields. These fields are most relevant
+                  when the character reaches the edge of the screen, and the screen must adjust so the character can 
+                  continue. 
+                  <p></p>
+                  For determining the character's hit box, which is defined as the area wherin collisions will be detected,
+                  the character has a width and a height. These are both measured in pixels. The hitbox is stored as a four 
+                  value tuple of the character's x, y, width, and height. These four parameters are all that is needed to 
+                  determine the collision window, or hitbox. Width, height, and hitbox are all stored as member fields. 
+                </p>
+                Item
+                <p style="text-align: left;padding: 0px 40px;">
+                  test
+                </p>
+                Weapon
+                <p style="text-align: left;padding: 0px 40px;">
+                  test
+                </p>
+                Armor
+                <p style="text-align: left;padding: 0px 40px;">
+                  test
+                </p>
+                Obstacle
+                <p style="text-align: left;padding: 0px 40px;">
+                  test
+                </p>
+                Environment
+                <p style="text-align: left;padding: 0px 40px;">
+                  test
+                </p>
               </p>
               <hr id='userinput'>
               <h4>User input</h4>
