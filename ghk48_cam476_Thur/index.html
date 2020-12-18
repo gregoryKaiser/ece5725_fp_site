@@ -71,25 +71,9 @@
 
       <hr>
       <div class="center-block">
-          <iframe width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+          <iframe width="640" height="360" src="https://www.youtube.com/embed/vWkzyjgylwI" frameborder="0" allowfullscreen></iframe>
           <h4 style="text-align:center;">Demonstration Video</h4>
       </div>
-
-      <!-- <hr id='obj'> -->
-      <!-- <div class="row"> -->
-          <!-- <div class="col-md-4" style="text-align:center;">
-          <img class="img-rounded" src="pics/1.jpg" alt="Generic placeholder image" width="240" height="240">
-          </div> -->
-          <!-- <div class="col-md-8" style="font-size:18px;"> -->
-          <!-- <h2>Project Objective:</h2> -->
-          <!-- <p style="text-align: left;padding: 0px 30px;">
-            The objective of "It's Dangerous To Go Alone" is to demonstrate an interactive adventure game which requires 
-            one to obtain items through the detection of real objects using a Raspberry Pi (RPi) camera. We wanted to exercise our object-oriented programming skills to develop a starting point for future game level design and feature
-            additions. Additionally, we sought to demonstrate
-            a remote connection for two Raspberry Pi's to communicate, allowing for a fun game to be played while social distancing in 2020. 
-          </p> -->
-          <!-- </div> -->
-      <!-- </div> -->
 
       <hr id="obj">
       <div style="text-align:center;">
@@ -600,7 +584,15 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
       <div style="text-align:center;">
               <h2>Result</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]This is the results section. 
+                We certainly accomplished many of our goals with this project. The single player version of the game uses a camera to make an interactive experience for a user, and we were able to implement many elements of a game engine on our own, including some physics and collision detection, as well as environmental game effects. Using minimal hardware due to the remote nature of this semester was a success, since neither of us ran into significant issues getting the camera to operate properly. Additionally, the use of the PiTFT was a great success, since we both loved the small-computer-screen/handheld-gaming aesthetic of that device. While we were unable to completely implement a multiplayer version of the game exactly as promised, we made significant progress towards a great-than-local-network channel of communication, and learned a lot about networking on the way. Outside of that element, each piece of the project performed as expected.  
+              </p>
+              <figure>
+                <img class="img-rounded" src="pics/concept_game.png" alt="concept" style="width:40%;">
+                <img class="img-rounded" src="pics/button_identify.jpg" alt="final im" style="width:40%;"><br>
+                <figcaption>Compared to our original game concept, we did a great job of going beyond the look and feel that we were aiming for.</figcaption>
+              </figure><br>
+              <p style="text-align: left;padding: 0px 30px;">
+                Because of the condensed timeline this semester, we also practiced good project management by accomplishing milestones in an incremental manner every week. We had concrete goals to achieve, and although we did not adhere perfectly to the original schedule, we made intelligent choices to modify it along the way. There was always significant progress each week, either in the development of a new capability, or by implementing a solution to a previous week's problem. Scheduling synchronous meetings across time zones and busy schedules was difficult.
               </p>
       </div>
 
@@ -608,7 +600,13 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
       <div style="text-align:center;">
               <h2>Conclusion</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]This is the conclusion section.
+                We were able to accomplish a lot in just a few weeks despite the circumstances of this crazy semester. The game that we created works as we intended, and there is a clear path forward towards the greater multiplayer goal. We were very pleased with the responsiveness of the device, both in moving and jumping, as well as the consistency of object detection, which works well given that it is running on the RPi 4. The result is a fun game platform with a lot of potential for level development. We also gained a greater appreciation for game development in general, and tried to approach the problem in a modular and expandable way. Level design based on the classes that we have created is easy and fun to do.
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                If we had to do this project again, we would probably start with the multiplayer aspect of the game, since the game logic and object detection is now a problem that we know how to solve. We know that our attempts at multiplayer over multiple networks definitely did not work, but each of the attempts is still a valid direction to continue trying. We also know that checking for rectangle collisions ourselves was unneccessary, and does not work very well either. In order to expand collision logic to multiple physical items, a more efficient approach is required. We definitely learned that, although a lot of time was spent developing our own rectangle collision logic, that time was not wasted. Having attacked that problem and run into a roadblock made the development of our final collision detection logic much more robust and easier to implement.
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                In the end, we had the most fun developing the game engine itself. That is, the collection and display of images that we get to select, enabling character movements/collisions, being able to change the gravity in this world, applying environmental effects, and organizing the level's obstacles and properties, was the most enjoyable part. This was the part of Lab 2 that intrigued us the most, since designing our own Motor class activated our creativity. The design elements of the game, how the object-oriented hierarchy is organized, what functions and variables are attributed to each object, and how that informs gameplay, all allow us to use our imaginations and come up with our own way of accomplishing tasks. We look forward to using the Raspberry Pi platform for development along these lines in the future.
               </p>
       </div>
 
@@ -616,7 +614,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
       <div style="text-align:center;">
               <h2>Future Work</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                There are many different directions that this project could head in the future, and there are many elements that could be expanded for more functionality. The two main components of the game that could be improved are the game functions themselves, and the multiplayer component that we started.
+                There are many different directions that this project could head in the future, and there are many elements that could be expanded for more functionality. The two main components of the game that could be improved are the game functions themselves, and the multiplayer component which we started.
               </p>
               <h3>Expanding the game</h3>
               <p style="text-align: left;padding: 0px 30px;">
@@ -657,9 +655,10 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <h4>Group picture of Caeli and Greg.</h4>
               <p>
                 All synchronous work was done over zoom using other collaboration tools like the Live Share feature of VS Code as well as github and Google Drive. A lot of asynchronous work was done due to scheduling conflicts and the time difference between the east and west Coast<br><br>
-                <b>Group responsibilities:</b>
-                  <li>Class and game logic design.</li>
-                  <li>Image asset collection.</li>
+                <b>Group responsibilities:</b><br>
+                  - Class and higher-level game logic design.<br>
+                  - Image asset collection.<br>
+                  <!-- - Objective, Introduction, Results, and Conclusion sections of the report.<br> -->
               </p>
           </div>
           <div class="col-md-6" style="font-size:16px">
@@ -667,6 +666,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <h3>Caeli MacLennan</h3>
               <p class="lead">cam476@cornell.edu</p>
               <p>
+                <li>Collision logic game engine.</li>
                 [describe contributions in paragraphical or list form]
               </p>
           </div>
@@ -674,14 +674,14 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <img class="img-rounded" src="pics/greg_pic.png" alt="Headshot of Greg" width="240" height="240">
               <h3>Gregory Kaiser</h3>
               <p class="lead">ghk48@cornell.edu</p>
-              <p>
-                <li>Designed the state machine and menu cycle.</li>
-                <li>Developed and tested TFLite capabilities and integrated them into game logic.</li>
-                <li>Adapted TFLite to run on the piTFT, and designed item spawning logic (checking for detected objects).</li>
-                <li>Attempted to host a web server on the class server using ssh commands (Attempt 2).</li>
-                <li>Wrote desktop_server.py, desktop_client.py, and rpi_client.py to establish object transfer over local network (Attempt 3).</li>
-                <li>Edited demonstration video.</li>
-                <li>Wrote website sections on the above, as well as the Testing, Hardware, and Future Work sections.</li>
+              <p style="text-align: left;padding: 0px 30px;">
+                - Designed the state machine and menu cycle.<br>
+                - Developed and tested TFLite capabilities and integrated them into game logic.<br>
+                - Adapted TFLite to run on the piTFT, and designed item spawning logic (checking for detected objects).<br>
+                - Attempted to host a web server on the class server using ssh commands (Attempt 2).<br>
+                - Wrote desktop_server.py, desktop_client.py, and rpi_client.py to establish object transfer over local network (Attempt 3).<br>
+                - Wrote website sections on the above, as well as the Testing, Hardware, and Future Work sections.<br>
+                - Filmed/edited demonstration video.<br>
               </p>
           </div>
       </div>
