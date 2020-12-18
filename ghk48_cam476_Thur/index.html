@@ -313,6 +313,10 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
 <br>
               <p style="text-align: left;padding: 0px 30px;">
                 Of course, the player is also responsible for finding items in real life for the game to detect, and experimenting to find our limited set of detectable objects.
+                <figure>
+                <img class="img-rounded" src="pics/button_label.png" alt="RPi front" style="width:50%;">
+                <figcaption>The button functions are labeled with icons that indicate their function. The entire touchscreen is used as a jump button, and game variables are displayed in the upper-left corner.</figcaption>
+                </figure><br>
               </p>
               <hr id='collisions'>
               <h4>Collision logic</h4>
@@ -417,7 +421,17 @@ recog_armor <span style="color: #333333">=</span> [<span style="background-color
         shirt<span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #888888">#thrown in</span>
         disp_objects<span style="color: #333333">.</span>append(shirt) <span style="color: #888888">#add to screen</span>
 </pre></div><br>
-
+              <p style="text-align: left;padding: 0px 30px;">
+                <figure>
+                <img class="img-rounded" src="pics/orange_detect.png" alt="RPi front" style="width:30%;">
+                <img class="img-rounded" src="pics/apple_frame.png" alt="RPi front" style="width:30%;"><br>
+                <img class="img-rounded" src="pics/tie_detect.png" alt="RPi front" style="width:30%;">
+                <img class="img-rounded" src="pics/armor_frame.png" alt="RPi front" style="width:30%;"><br>
+                <img class="img-rounded" src="pics/scissors_detect.png" alt="RPi front" style="width:30%;">
+                <img class="img-rounded" src="pics/sword_frame.png" alt="RPi front" style="width:30%;"><br>
+                <figcaption>Examples of a detected object, along with its spawned item.</figcaption>
+                </figure><br>
+              </p>
               <p style="text-align: left;padding: 0px 30px;">
                 These were the most appropriate labels that the model was already trained upon, so the player must find these objects through trial and error. While it takes time, training one's own custom model is also possible, and is explained by <a href="https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Raspberry_Pi_Guide.md#part-1---how-to-set-up-and-run-tensorflow-lite-object-detection-models-on-the-raspberry-pi" target="_blank">EdjeElectronics</a> in their very informative tutorial.
               </p>
@@ -488,17 +502,22 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <p style="text-align: left;padding: 0px 30px;">
                 We also attempted to host a server on one RPi through the class server by opening a reverse ssh tunnel. First, we ran the following command in the terminal of either our laptop or the first RPi:
               </p>
-<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssh -R 1000:localhost:4000 <span style="color: #333333">[</span>netid<span style="color: #333333">]</span>@132.236.79.205
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssh -R 6009:localhost:5000 <span style="color: #333333">[</span>netid<span style="color: #333333">]</span>@132.236.79.205
 </pre></div><br>
               <p style="text-align: left;padding: 0px 30px;">
-                This opens a connection between port 4000 on the device that issued the command, and opens port 1000 on the class server. To check that this connection is open and correct, Anthony Ngoma, a generous classmate, provided the following command which lists open ports on the class server:
+                This opens a connection between port 5000 on the device that issued the command, and opens port 6009 on the class server. To check that this connection is open and correct, Anthony Ngoma, a generous classmate, provided the following command which lists open ports on the class server:
               </p>
 <!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">netstat -tulpn 
 </pre></div><br>
+              <figure>
+                <img class="img-rounded" src="pics/ssh_connect.png" alt="banana" style="width:45%;">
+                <img class="img-rounded" src="pics/ssh_confirm.png" alt="banana" style="width:45%;">
+                <figcaption>After issuing the command to open the port, it is confirmed as open using the <code>netstat</code> command.</figcaption>
+              </figure><br>
               <p style="text-align: left;padding: 0px 30px;">
-                Once the creation of that open port was confirmed, we attempted to use the -L option of the ssh command to open a connection to a second device, this time from port 2000 on the second device, to the now open port 1000 on the class server:
+                Once the creation of that open port was confirmed, we attempted to use the -L option of the ssh command to open a connection to a second device, this time from port 2000 on the second device, to the now open port 6009 on the class server:
               </p>
-<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssh -L 2000:localhost:1000 <span style="color: #333333">[</span>othernetid<span style="color: #333333">]</span>@132.236.79.205
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssh -L 2000:localhost:6009 <span style="color: #333333">[</span>othernetid<span style="color: #333333">]</span>@132.236.79.205
 </pre></div><br>
 
               <p style="text-align: left;padding: 0px 30px;">
@@ -512,7 +531,18 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 The <code>desktop_server.py</code> script creates a custom <code>Server</code> object to collect game data and display it in a window. It waits for a connection to a client, continuously recieves game data, and merely shows where those objects are on-screen, without the ability to control them.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
-                The <code>desktop_client.py</code> script creates a custom <code>Client</code> object which connects a desktop version of our game in a primitive form. User input is adapted to allow the use of the keyboard to move the player, and all game logic is performed locally in this script. At the end of a frame, <code>pickle</code> is used to package and send the entire displayable objects list to the server for display on the other end. The <code>rpi_client.py</code> script runs on the same logic as <code>desktop_client.py</code>, except that it can run without issue on the RPi, and the usual piTFT buttons can be used to control the game. 
+                The <code>desktop_client.py</code> script creates a custom <code>Client</code> object which connects a desktop version of our game in a primitive form. User input is adapted to allow the use of the keyboard to move the player, and all game logic is performed locally in this script. At the end of a frame, <code>pickle</code> is used to package and send the entire displayable objects list to the server for display on the other end.  
+                <figure>
+                <img class="img-rounded" src="pics/laptop_multi.png" alt="banana" style="width:50%;">
+                <figcaption>Running on a laptop, the transfer of data is much faster while the server mirrors what the client is controlling. Hitboxes are shown to ease debugging of potential collision issues due to lag between data transfers.</figcaption>
+              </figure><br>
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                The <code>rpi_client.py</code> script runs on the same logic as <code>desktop_client.py</code>, except that it can run without issue on the RPi, and the usual piTFT buttons can be used to control the game.
+                <figure>
+                <img class="img-rounded" src="pics/rpi_multi.png" alt="banana" style="width:50%;">
+                <figcaption>Running on a Raspberry Pi, the transfer of data is a bit slow while the server mirrors what the client is controlling using the PiTFT buttons.</figcaption>
+              </figure><br>
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 Because <code>pickle</code> is not capable of packaging pygame surfaces, our original <code>classes.py</code> script needed to be adapted to <code>classes_multi.py</code>, which instead stores image file paths instead of a pre-generated pygame surface. Every time an object is drawn, the pygame surface can then be made locally on either the client or the server side to show it in a window.
@@ -539,10 +569,27 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <h3>Gravity and Drag and Collisions</h3>
               <p style="text-align: left;padding: 0px 30px;">
                 Testing the gravity and collision logic was by far the most grueling cycle of debugging. Whenever we made a small change, the results were tested by jumping around and making observations. Tweaks to hitboxes, the magnitude of gravity, the magnitude of item drag, and the placement of objects, all required a rapid cycle of small-change unit tests. Eventually, we settled on a gravity that was strong enough to require some skill to run and jump at the same time, but not so strong as to make navigation impossible. Drag was set such that items that pop-in from an object detection phase skid to a stop on the floor platform, without sliding all the way to the left. While the collision logic went through a number of iterations, the method we ended up with causes a nice animated jitter for all objects with physics. This gives a clear indication that those objects are "real" and an be interacted with.
+                <figure>
+                <img class="img-rounded" src="pics/apple_frame.png" alt="banana" style="width:30%;">
+                <figcaption>Though the items are spawned with significant rightward speed, they come to a stop on the floor before reaching the block on the left.</figcaption>
+              </figure><br></p>
+              <p style="text-align: left;padding: 0px 30px;">
+                We also tested the equipping-item logic many times. This involves detecting that the hero has collided with an equippable item, and then drawing it as an equipped image for the rest of the game instead of giving it the usual item physics.
+                <figure>
+                <img class="img-rounded" src="pics/sword_equipped.png" alt="banana" style="width:30%;">
+                <figcaption>After working with small offsets from the hero's position, equipped armor and blades appear near the hero at all times.</figcaption>
+              </figure><br>
               </p>
               <h3>Camera and well-detected objects</h3>
               <p style="text-align: left;padding: 0px 30px;">
                 Testing the potentially detected objects didn't take long, and some cross-referencing of the text file containing all the possible labels was necessary. We found that the label "person" was very reliably able to detect a person's hand or face. After testing a few of the items against what we have handy in our homes, we chose the objects that were detected consistently. For example, testing the camera on a butter knife was detected as "scissors" more often than "knife." This is due to the fact that it has the same texture/shine through the blade and handle. A kitchen knife with a darker handle would have been more reliable, but an actaul pair of scissors were detected easily as well. We also found that a lemon, shown in the demonstration video, was detected as an apple consistently enough for the demonstration. Note that this is only because Greg did not have apples nor bananas in his house at the time of testing. Both of those fruits, as well as clementines (detected as "orange"), can be identified by the object detection system.
+                <figure>
+                <img class="img-rounded" src="pics/banana_detect.png" alt="banana" style="width:30%;">
+                <img class="img-rounded" src="pics/orange_detect.png" alt="orange" style="width:30%;"><br>
+                <img class="img-rounded" src="pics/tie_detect.png" alt="tie" style="width:30%;">
+                <img class="img-rounded" src="pics/scissors_detect.png" alt="scissors" style="width:30%;">
+                <figcaption>Some examples of easily detected objects for use in-game. The fruit all spawn an apple, whereas the tie spawns armor, and the scissors spawn a blade.</figcaption>
+              </figure><br>
               </p>
               <h3>Multiplayer testing/debugging</h3>
               <p style="text-align: left;padding: 0px 30px;">
