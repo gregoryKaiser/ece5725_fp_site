@@ -74,20 +74,31 @@
           <h4 style="text-align:center;">Demonstration Video</h4>
       </div>
 
-      <hr id='obj'>
-      <div class="row">
+      <!-- <hr id='obj'> -->
+      <!-- <div class="row"> -->
           <!-- <div class="col-md-4" style="text-align:center;">
           <img class="img-rounded" src="pics/1.jpg" alt="Generic placeholder image" width="240" height="240">
           </div> -->
-          <div class="col-md-8" style="font-size:18px;">
-          <h2>Project Objective:</h2>
-          <p style="text-align: left;padding: 0px 30px;">
+          <!-- <div class="col-md-8" style="font-size:18px;"> -->
+          <!-- <h2>Project Objective:</h2> -->
+          <!-- <p style="text-align: left;padding: 0px 30px;">
             The objective of "It's Dangerous To Go Alone" is to demonstrate an interactive adventure game which requires 
             one to obtain items through the detection of real objects using a Raspberry Pi (RPi) camera. We wanted to exercise our object-oriented programming skills to develop a starting point for future game level design and feature
             additions. Additionally, we sought to demonstrate
             a remote connection for two Raspberry Pi's to communicate, allowing for a fun game to be played while social distancing in 2020. 
-          </p>
-          </div>
+          </p> -->
+          <!-- </div> -->
+      <!-- </div> -->
+
+      <hr id="obj">
+      <div style="text-align:center;">
+              <h2>Project Objective</h2>
+              <p style="text-align: left;padding: 0px 30px;">
+                The objective of "It's Dangerous To Go Alone" is to demonstrate an interactive adventure game which requires 
+                one to obtain items through the detection of real objects using a Raspberry Pi (RPi) camera. We wanted to exercise our object-oriented programming skills to develop a starting point for future game level design and feature
+                additions. Additionally, we sought to demonstrate
+                a remote connection for two Raspberry Pi's to communicate, allowing for a fun game to be played while social distancing in 2020. 
+              </p>
       </div>
 
       <hr id="intro">
@@ -143,8 +154,9 @@
                 Below is an in-depth description of each function and class.
               </p>
               <h4>Classes</h4>
-              <p style="text-align: left;padding: 0px 30px;">
-                Character 
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Character</b>
+              </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   The character class is meant to store the hero player and give them the ability to make changes upon
                   their environment, as well as to allow the environment to make changes to the hero. To determine where
@@ -155,21 +167,25 @@
                   continue. Finally, the character needs to update their position when the move function is called. To
                   determine how much the position should be updated, the character has an x and y speed, which correspond
                   to the number of pixels added to the x and y positions and global positions when the move function is called.
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   For determining the character's hit box, which is defined as the area wherin collisions will be detected,
                   the character has a width and a height. These are both measured in pixels. The hitbox is stored as a four 
                   value tuple of the character's x, y, width, and height. These four parameters are all that is needed to 
                   determine the collision window, or hitbox. Width, height, and hitbox are all stored as member fields. 
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   To store the image used to display the character on the screen the character class has two member fields: 
                   a left image field and a right image field. This allows for the character to face the direction they are
                   moving, which is kept track of using the direction member field. In single player mode, these fields store 
                   pygame image objects, but in the multiplayer version they store image directories for ease of file transfer. 
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   The above mentioned member fields cover the basic necessities of displaying the character, keeping track of
                   their location, deciding their collision window and storing their speed. The following member functions allow 
                   the character to retain effects from environment interactions.
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   The health member field of the character is initialized to 100 and stores the amount of health the character
                   has. This value can be modified when the character collides with certain objects, as will be discussed later.
                   The attack member field stores the attack value of the last weapon item the hero collided with, while the defense
@@ -177,18 +193,21 @@
                   stores a list of the names of the items the character has collided with. Finally, the env_type 
                   member field stores the environment type of the last item the hero collided with. The item, weapon and armor classes
                   will be discussed later in this section. 
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   The last member fields included in the character class are physics_on and signaling. physics_on stores an integer key 
                   which will be used later in the collision function to determine how the object should react upon a collision. The signaling
                   member field was not implemented in the single player version, but would be used to indicate when the character is signaling
                   to the god player that they need an item to be dropped into the game.
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   To control the character, the member functions moveRight, moveLeft, jump, and stopMoving and implemented to update the appropriate
                   speed and direction member fields. The stop_signal and signal memner functions are meant as part of the multiplayer implementation, and toggle 
                   the character's "signaling" field to 0 or 1. 
-                  
                 </p>
-                Item
+                <p style="text-align: left;padding: 0px 40px;">
+                <b>Item</b>
+                </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   The item class includes an image, x, y, global_x, global_y, height, width, and physics_on much like the character class. It also has a speed_x and 
                   speed_y, which would be set to the speed the background is moving when the character is pushing against the edge of the screen, and a health, which stores
@@ -196,30 +215,38 @@
                   class is meant to store things that the hero can pick up, meaning objects of class item will dissappear or display on the character's person upon colliding with a character. This
                   is accomplished through the member field "picked_up", which is initialized to False but is set to true in the collision function when the hero 
                   collided with that item.
-                  <p></p>
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
                   An item's display after it is picked up is determined using the equippable member field. If an item is initialized with equippable set to True, 
                   logic in the member function draw will call draw_equipped and display the object on the body of the character that collides with it. Whether or not
                   the item has collided with a character is stored in the boolean "picked_up" member field. 
-                  <p></p>
                 </p>
-                Weapon
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
+                <b>Weapon</b>
+                </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   The weapon class is a child of the item class. From it's parent, the weapon class inherits the fields image, name, x, y, global_x, global_y, width, height, and equippable member fields.
                   In addition to the weapon's parent class fields, it also stores an image_l and image_r so that it may be pointing the same way as the hero when the hero turns and the weapon is equipped. 
                   Finally, the weapon has an attack parameter, the value of which will transfer to a character that collides with it. 
                   In addition to the draw function, the weapon class has a draw_equipped function that draws the weapon in front of the character after the character has collided with it. 
-        
                 </p>
-                Armor
+                <p style="text-align: left;padding: 0px 40px;">
+                <b>Armor</b>
+                </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   The armor class is also a child of the item class, and is almost identical to the weapon class except that it has a defense field instead of an attack field, and it also has an env_type member field,
                   which it gives to the character that collides with it. 
                 </p>
-                Obstacle
+                <p style="text-align: left;padding: 0px 40px;">
+                <b>Obstacle</b>
+                </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   The obstacle class has the member fields x, y, global_x, global_y, width, height, hitbox, speeed_x, speed_y, env_type, image, and physics_on.     
-                  </p>
-                Environment
+                </p>
+                <p style="text-align: left;padding: 0px 40px;">
+                <b>Environment</b>
+                </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   test
                 </p>
@@ -325,8 +352,7 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
 
               <h4>Wheezy downgrade</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                Because the update mentioned above causes issues when using pygame to control the piTFT, the downgrade performed in Lab 2 of ECE 5725 is repeated.<br><br>
-                [TODO: condensed wheezy downgrade explanation??] <br><br>
+                Because the update mentioned above causes issues when using Pygame to control the piTFT, the downgrade to Raspbian Wheezy performed in Lab 2 of ECE 5725 is repeated. These steps are also detailed on Adafruit's <a href="https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/pitft-pygame-tips" target="_blank">2.8'' PiTFT installation/use tutorial</a> which goes into some detail on the file changes required to use Pygame. A handy bash script there makes all of the necessary changes at once.<br><br>
                 Once the necessary file changes are made, the wheezy downgrade can be installed.
               </p>
 <!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo apt-get update</span>
@@ -508,19 +534,25 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
       <div style="text-align:center;">
               <h2>Testing</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]This is the testing section. Mention vs code workflow here as well
+                Testing our design was a continuous process that happened every step of the way. Whenever significant changes were made to the source code, it was tested on the RPi to confirm that all elements of user input were still functioning properly. For most stages of development, we met as a team over zoom and began a <a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare" target="_blank">VS Code LiveShare</a> session. This way, we could develop together on the same file without having to worry about github merge conflicts. Whenever asynchronous work was completed, or if development was performed on the RPi's themselves, we made sure to communicate about who had the latest version of the code to avoid conflicts. The first iteration of the use of Pygame was run on a laptop, but all subsequent development was first pushed to the github repository, pulled by either of us on a RPi, and run there to test.
               </p>
               <h3>Gravity and Drag and Collisions</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                Testing the gravity and collision logic was by far the most grueling cycle of debugging. Whenever we made a small change, the results were tested by jumping around and making observations. Tweaks to hitboxes, the magnitude of gravity, the magnitude of item drag, and the placement of objects, all required a rapid cycle of small-change unit tests. Eventually, we settled on a gravity that was strong enough to require some skill to run and jump at the same time, but not so strong as to make navigation impossible. Drag was set such that items that pop-in from an object detection phase skid to a stop on the floor platform, without sliding all the way to the left. While the collision logic went through a number of iterations, the method we ended up with causes a nice animated jitter for all objects with physics. This gives a clear indication that those objects are "real" and an be interacted with.
               </p>
               <h3>Camera and well-detected objects</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                Testing the potentially detected objects didn't take long, and some cross-referencing of the text file containing all the possible labels was necessary. We found that the label "person" was very reliably able to detect a person's hand or face. After testing a few of the items against what we have handy in our homes, we chose the objects that were detected consistently. For example, testing the camera on a butter knife was detected as "scissors" more often than "knife." This is due to the fact that it has the same texture/shine through the blade and handle. A kitchen knife with a darker handle would have been more reliable, but an actaul pair of scissors were detected easily as well. We also found that a lemon, shown in the demonstration video, was detected as an apple consistently enough for the demonstration. Note that this is only because Greg did not have apples nor bananas in his house at the time of testing. Both of those fruits, as well as clementines (detected as "orange"), can be identified by the object detection system.
               </p>
               <h3>Multiplayer testing/debugging</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                Testing the multiplayer components, unlike the rest of the project, were much less fun to test and debug. The results of tests of this nature are much less visual, and have more to do with whether or not our settings are correct. Testing these server and client scripts was more about frequent communication between the two of us across networks, with screen sharing of some kind enabled to allow both of us to understand what was happening. By calling out when the server is open, and with what settings, we were able to try multiple permutations of the IP address and port fields to hunt down our problems. Using the command given to us by Anthony Ngoma also allowed us to test our ssh command to rule that out as a potential source of error. Working with the TA's over office hours also helped us aim some brain power into understanding which ports are meant to connect, and how.
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                Once we decided to go with a local option, porting the game script into either the desktop version of the client, or the raspberry pi client, was simple. However, two scripts were developed for use on a laptop in order to confirm that a test object was being transferred at all. This helped debug issues with our use of the <code>pickle</code> library, and with the socket connection as an isolated problem. The scripts <code>multi_server.py</code> and <code>multi_client.py</code> contained a single identical <code>tst_obj</code> with a few fields inside. They defined a custom <code>Server</code> and <code>Client</code> class, respectively. By opening a socket connection and just transferring this single test object from the client to the server, repeatedly, we were able to confirm that <code>pickle</code> was working in conjunction with <code>socket</code> to transfer our data.
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                Once the desktop and RPi version of the client, as well as the adapted server script, were complete, a bit of testing was required to make sure that user input on the desktop side was registered correctly. Also, due to the fact that pickle cannot package Pygame surfaces, some extra development had to be done to convert the <code>image</code> member field to an <code>imagepath</code> for each object on-screen. The hitboxes were also re-enabled, as seen in the demonstration video for the local multiplayer component, to debug collision issues and figure out if the hitboxes are accurate, or if bugs were a result of lag across the local connection.
               </p>
       </div>
 
@@ -621,26 +653,74 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <li><a href="https://www.adafruit.com/product/1601" target="_blank">Adafruit PiTFT 1.8'' TFT and Touchscreen</a> $35.00</li>
               <li><a href="https://www.amazon.com/Raspberry-Pi-Camera-Module-Megapixel/dp/B01ER2SKFS/ref=sr_1_3?dchild=1&keywords=raspberry+pi+camera&qid=1608266423&sr=8-3" target="_blank">Raspberry Pi Camera V2</a> $25.00</li>
           </ul>
-          <h3>Total: $95.00</h3>
+          <h3>Total: $95.00 ($60.00 if PiTFT not included)</h3>
       </div>
       <hr>
       <div style="font-size:18px">
           <h2>References</h2>
-          <a href="https://picamera.readthedocs.io/">PiCamera Document</a><br>
-          <a href="http://www.micropik.com/PDF/SG90Servo.pdf">Tower Pro Servo Datasheet</a><br>
-          <a href="http://getbootstrap.com/">Bootstrap</a><br>
-          <a href="http://abyz.co.uk/rpi/pigpio/">Pigpio Library</a><br>
-          <a href="https://sourceforge.net/p/raspberry-gpio-python/wiki/Home/">R-Pi GPIO Document</a><br>
-
+          <a href="https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Raspberry_Pi_Guide.md#part-1---how-to-set-up-and-run-tensorflow-lite-object-detection-models-on-the-raspberry-pi" target="_blank">Evan, EdjeElectronics, TensorFlow-Lite-Object-Detection.</a><br>
+          <a href="https://courses.ece.cornell.edu/ece5990/ECE5990_Fall15_FinalProjects/Andre_Heil/ece5990_final_report/avh34_jr986.html" target="_blank">Jingyao Ren and Andre Heil, Face Recognition System.</a><br>
+          <a href="https://www.youtube.com/watch?v=-3B1v-K1oXE" target="_blank">TechWithTim, Online Multiplayer Game With Python - Sockets and Networking: </a><br>
+          <a href="https://pygame.org" target="_blank">Pygame</a><br>
+          <a href="https://courses.ece.cornell.edu/ece5990/ECE5725_Fall2019_Projects/Dec_13_Demo/Legend%20of%20Pielda/Monday_gx55_jf832_.LegendOfPielda/index.html " target="_blank">Feng, Jie, Xie, Gengqiao. “Final Project of ECE 5725: Legend of Pielda.”</a><br>
+          <a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/7" target="_blank">Picamera Libraries.</a><br>
+          <a href="https://www.techwithtim.net/tutorials/game-development-with-python/side-scroller-pygame/background/" target="_blank">TechWithTim, Pygame Side Scroller.</a><br>
+          <a href="https://github.com/techwithtim/Network-Game-Tutorial" target="_blank">TechWithTim, LAN multiplayer game.</a><br>
+          <a href="https://www.techwithtim.net/tutorials/python-online-game-tutorial/server/" target="_blank">TechWithTim, Online server multiplayer game.</a><br>
+          <a href="https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/pitft-pygame-tips" target="_blank">Adafruit Wheezy downgrade.</a><br>
+          <!-- <a href="https://pygame.org" target="_blank">Pygame</a><br> -->
       </div>
       <div style="font-size:18px">
-          <h2>Image sources</h2>[TODO]
+          <h2>Image sources (in-game)</h2>
+          <a href="https://banner2.cleanpng.com/20180403/yge/kisspng-knife-computer-icons-pixel-art-pixel-art-5ac406eae6de59.9927812015227962669457.jpg" target="_blank">Knife sprite</a><br>
+          <a href="https://www.seekpng.com/png/full/819-8194450_minecraft-diamond-chestplate-chestplate-minecraft.png" target="_blank">Armor sprite</a><br>
+          <a href="https://www.101computing.net/wp/wp-content/uploads/Applepix.png" target="_blank">Apple sprite</a><br>
+          <a href="https://static.wikia.nocookie.net/nintendo/images/6/63/Brick_Block.png/revision/latest/scale-to-width-down/340?cb=20151206062204&path-prefix=en" target="_blank">Brick sprite</a><br>
+          <a href="https://i.redd.it/phrlrn16jb101.png" target="_blank">Background image</a><br>
+          <a href="https://cdn.shopify.com/s/files/1/1061/1924/products/Praying_Emoji_ios10_020ec88e-ee33-496d-a95a-df23243cebf4_grande.png?v=1571606092" target="_blank">"Pray" emoji</a><br>
+          <a href="https://img.icons8.com/plasticine/2x/arrow.png" target="_blank">Arrow icon</a><br>
+          <a href="https://lh3.googleusercontent.com/proxy/A_nefWTpQPtq3HPrmivxU88LsduCnzEkatrug9MtuxOiBTupBAvEN9Y8XUnl-Kz27k1HOK0ivP8vYTMCC1qEVRsFcNWMUdpd8iPDQ8djKcEs" target="_blank">"Quit" icon</a><br>
+          <a href="" target="_blank">Hero "flatboy" images</a><br>
+          <a href="" target="_blank">Ground image</a><br>
       </div>
 
     <hr>
 
       <div class="row">
-              <h2>Code Appendix</h2>[TODO]
+              <h2>Code Appendix</h2>
+              <h3>game_and_detect_update.py</h3>
+              <pre><code>
+// Hello World.c
+int main(){
+  printf("Hello World.\n");
+}
+              </code></pre>
+
+              <h3>classes.py</h3>
+              <pre><code>
+// Hello World.c
+int main(){
+  printf("Hello World.\n");
+}
+              </code></pre>
+
+              <h3>desktop_server.py</h3>
+              <pre><code>
+// Hello World.c
+int main(){
+  printf("Hello World.\n");
+}
+              </code></pre>
+
+              <h3>desktop_client.py</h3>
+              <pre><code>
+// Hello World.c
+int main(){
+  printf("Hello World.\n");
+}
+              </code></pre>
+
+              <h3>rpi_client.py</h3>
               <pre><code>
 // Hello World.c
 int main(){
