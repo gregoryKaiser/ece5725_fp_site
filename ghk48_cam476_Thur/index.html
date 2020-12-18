@@ -370,7 +370,7 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
                 also in the collided objects list, the objects x or y direction is edited, depending on the direction passed to the function. If checking for x collisions, the function will set moving objects back by their width in the reverse 
                 direction the object was moving. This prevents objects from getting stuck to each other when they collide. In the y direction, collided objects will be have whatever move they just made reversed by subtracting the object's speed
                 field from the object's y position. This is what prevents objects from falling through other objects. Finally, at the end of each iteration of the loop the object's hitbox is updated with the new x and y positions of the object. 
-                
+
               </p>
               <p style="text-align: left;padding: 0px 30px;">
 
@@ -550,7 +550,10 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               </p>
               <h4>Attempt 1: Opening a port on a home network</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                Our first attempt at an online connection was made by setting up port forwarding on Caeli's home router. Our hope was that by using the server's external IP instead of the local IP, we could use the local setup to connect two devices on different networks.
+                The port was opened and set to direct all incoming traffic to the local IP address of the laptop serving as the server host. Then, an exception to the firewall settings was made on that laptop to allow incoming traffic on the designated port. This method resulted
+                in a connection timeout error from the client script. Further probing using the website https://www.yougetsignal.com/tools/open-ports/ indicated that despite all efforts to open the port, the port was still closed. After this point we decided to try a different
+                approach that other students in the class seemed to be having success with.
               </p>
               <h4>Attempt 2: Host a server on a port on the class server</h4>
               <p style="text-align: left;padding: 0px 30px;">
