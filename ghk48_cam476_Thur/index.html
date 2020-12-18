@@ -152,12 +152,36 @@
                   to the character's current x and y screen coordinates. To store the character's location relative to the 
                   game map, the character class also has global_x and global_y member fields. These fields are most relevant
                   when the character reaches the edge of the screen, and the screen must adjust so the character can 
-                  continue. 
+                  continue. Finally, the character needs to update their position when the move function is called. To
+                  determine how much the position should be updated, the character has an x and y speed, which correspond
+                  to the number of pixels added to the x and y positions and global positions when the move function is called.
                   <p></p>
                   For determining the character's hit box, which is defined as the area wherin collisions will be detected,
                   the character has a width and a height. These are both measured in pixels. The hitbox is stored as a four 
                   value tuple of the character's x, y, width, and height. These four parameters are all that is needed to 
                   determine the collision window, or hitbox. Width, height, and hitbox are all stored as member fields. 
+                  <p></p>
+                  To store the image used to display the character on the screen the character class has two member fields: 
+                  a left image field and a right image field. This allows for the character to face the direction they are
+                  moving, which is kept track of using the direction member field. In single player mode, these fields store 
+                  pygame image objects, but in the multiplayer version they store image directories for ease of file transfer. 
+                  <p></p>
+                  The above mentioned member fields cover the basic necessities of displaying the character, keeping track of
+                  their location, deciding their collision window and storing their speed. The following member functions allow 
+                  the character to retain effects from environment interactions.
+                  <p></p>
+                  The health member field of the character is initialized to 100 and stores the amount of health the character
+                  has. This value can be modified when the character collides with certain objects, as will be discussed later.
+                  The attack member field stores the attack value of the last weapon item the hero collided with, while the defense
+                  member field stores the defense value of the last armor item the character collided with. Finally, the env_type 
+                  member field stores the environment type of the last item the hero collided with. The item, weapon and armor classes
+                  will be discussed later in this section. 
+                  <p></p>
+                  The last member fields included in the character class are physics_on and signaling. physics_on stores an integer key 
+                  which will be used later in the collision function to determine how the object should react upon a collision. The signaling
+                  member field was not implemented in the single player version, but would be used to indicate when the character is signaling
+                  to the god player that they need an item to be dropped into the game.
+                  
                 </p>
                 Item
                 <p style="text-align: left;padding: 0px 40px;">
