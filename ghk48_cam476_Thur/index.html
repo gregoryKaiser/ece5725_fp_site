@@ -227,13 +227,18 @@
                 <b>Obstacle</b>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  The obstacle class has the member fields x, y, global_x, global_y, width, height, hitbox, speeed_x, speed_y, env_type, image, and physics_on.     
-                </p>
+                  The obstacle class has the member fields x, y, global_x, global_y, width, height, hitbox, speeed_x, speed_y, env_type, image, and physics_on. This class is meant to hold stationary objects such as
+                  platforms that the character can jump on or needs to maneuver around. To prevent the object from being affected by gravity in the collision loop, "physics_on" is set to zero. The obstacle class also
+                  has an env_type, which would allows for micro-environments such as a platform of ice or one of hot coals that the hero has to additionally be equipped for.     
+                  </p>
                 <p style="text-align: left;padding: 0px 40px;">
                 <b>Environment</b>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  test
+                  The environment class is the only object that does not display on the screen, and is meant to create an invisible environment that the characters must be equipped for in order to avoid losing health. 
+                  This class has a global_x position, an effect_length, a string "env_type", an attack, and a "physics_on" member field. Even though this object is not displayed, giving it a "physics_on" field allows it to be
+                  handled the same as the other objects when handling collisions. The "attack" field stores the amount of health that will be decremented from all characters within the range of the environment that are not 
+                  equipped for it. Note that environments of type "None" have attack 0, so a character equipped for a special environment can still enter a temperate one without needing to equip new armor. 
                 </p>
               </p>
               <hr id='userinput'>
