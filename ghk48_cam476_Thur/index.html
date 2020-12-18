@@ -275,31 +275,7 @@
                 The drop item function, called "drop_item_noncb", takes no arguements and is called when the game changes state between the "god" and "hero" mode. If the captured object is in the list of recognized objects, this function initlialzes
                 the object and appends it to the displayable objects list so that it can be drawn in the follwing cycle. 
               </p>
-              <h4>Callback Functions</h4>
-              <p style="text-align: left;padding: 0px 40px;">
-                <b>Move Hero Left</b>
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                testing...
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                <b>Move Hero Right</b>
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                testing...
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                <b>Switch State</b>
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                testing...
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                <b>Quit Game</b>
-              </p>
-              <p style="text-align: left;padding: 0px 40px;">
-                testing...
-              </p>
+              
               </p>
               <hr id='userinput'>
               <h4>User input</h4>
@@ -373,8 +349,34 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
               <hr id='collisions'>
               <h4>Collision logic</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                [TODO]
+                Implementing collision was tricky due to the large area of the objects colliding. To make collision checks efficient, rather that checking for collisions in all directions in one large check, the collision function
+                was implemented to take a direction field as well. In the main game program, the move function was called in the x direction on all objects, then collisions were detected in the x direction, then the objects were moved
+                in the y direction, and finally the y direction collisions were detected. This dual call structure requires fewer checks because the game does not have to consider the cases where an object is colliding with something but 
+                should still be permitting movement, such as walking on the floor or jumping and hitting the side of a block. 
               </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                Object collision in either direction is also broken up into two steps: detecting the objects that collided, and updatinng the object position. The first is handled by a recursive helper funciton called find_collisions,
+                which takes an object list. Inside the function logic, the head object of the passed list is removed and compared with the remaining objects in the list. Any object found to collide with the initial object is removed from
+                the passed list and appended to a seperate collision list. If the initial object collided with anything in the list, it is also appended to the collision list after being compared with all other objects in the passed list. 
+                During these checks, the initial removed object is checked if it is a character or an item; if so, each subsequent object will be checked to determine if it is an item if the first object is a hero, or it will check to see if
+                the subsequent objects are a character if the first was an item. Given a character-item collision, the item's name field is added to the character's inventory field, and the item's "picked_up" field is set to true. The health 
+                field of the item is also added to the health field of the character. If item is an armor item, the character's "env_type" field is also updated to match that of the armor's "env_type" field. Once all of these checks are 
+                finished and the objects have been added and removed from the appropriate lists, the function returns the list of collided objects plus a call to the helper function with the same list that was passed initially; since the
+                found collided objects have already been removed from this list, only objects for which a collision was not yet found will be checked. The base case is triggered when the passed list of objects is empty, wherin it returns 
+                list of collided objects. 
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+                After the helper function is finished executing, a list of the collided objects is returned to the main collision function. The list of objects originally passed to the collide function is iterated through; if the object is
+                also in the collided objects list, the objects x or y direction is edited, depending on the direction passed to the function. If checking for x collisions, the function will set moving objects back by their width in the reverse 
+                direction the object was moving. This prevents objects from getting stuck to each other when they collide. In the y direction, collided objects will be have whatever move they just made reversed by subtracting the object's speed
+                field from the object's y position. This is what prevents objects from falling through other objects. Finally, at the end of each iteration of the loop the object's hitbox is updated with the new x and y positions of the object. 
+                
+              </p>
+              <p style="text-align: left;padding: 0px 30px;">
+
+
+              </p>
+
               <hr id='objdetect'>
               <h3>Object Detection with TensorFlow-Lite</h3>
               <p style="text-align: left;padding: 0px 30px;">
