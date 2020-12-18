@@ -247,9 +247,58 @@
               </p>
               <p style="text-align: left;padding: 0px 40px;">
                 The "Collide" function checks the passed list of objects for collisions in the passed direction, which is x or y. So if 'x' was passed as a direction, collide detects object collisions from objects moving horizontally,
-                and if 'y' was passed then it would both check for collisions in the y direction and implement gravity. Object collisions between each other are checked in a recursivle helper function called "find_collisions" that takes
+                and if 'y' was passed then it would both check for collisions in the y direction. Object collisions between each other are checked in a recursivle helper function called "find_collisions" that takes
                 in the list of objects and returns a list of those that overlapped with another object's hitbox. Once the list of collided objects is returned, the main collide function handles object position adjustment in the appropriate
                 direction.
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Move Objects</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                The function to move objects, called "move_objs" takes a list of objects to move and a direction. When called, the function will move the objects by their x or y speed, depending on the direction passed, and will also implement
+                the correct physics effects on each object such as gravity and drag. Gravity affects all objects with a "physics_on" member field greater than 0. If the viable object's speed is less than 20, the terminal velocity, the object's 
+                speed is increased by two. Note that from the user's point of view, moving from the top of the screen to the bottom of the screen is moving in the positive y direction. Drag is implemented on all objects with non-zero speed, and
+                works both to slow objects as they fall and to provide a friction effect for non-character objects when they fall into the game and land on the ground. Because the character's x speed is controlled by the toggling of a button, x drag 
+                does not apply to the character. This is implemented by checking the object's "physics_on" parameter; only those objects with a physics of 1 will have x drag applied. 
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Redraw Window</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                Redraw window handles clearning the screen and then blitting the objects and background onto the screen to allow for character animation. Redraw window also handles drawing of all the text on the screen. Objects are drawn by looping
+                the displayable objects list and calling each object's draw function. In this loop each object is also checked to see if it is an item, since the item's draw function takes the hero arguement in addition to the window arguement. 
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Drop Item</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                The drop item function, called "drop_item_noncb", takes no arguements and is called when the game changes state between the "god" and "hero" mode. If the captured object is in the list of recognized objects, this function initlialzes
+                the object and appends it to the displayable objects list so that it can be drawn in the follwing cycle. 
+              </p>
+              <h4>Callback Functions</h4>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Move Hero Left</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                testing...
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Move Hero Right</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                testing...
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Switch State</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                testing...
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                <b>Quit Game</b>
+              </p>
+              <p style="text-align: left;padding: 0px 40px;">
+                testing...
               </p>
               </p>
               <hr id='userinput'>
@@ -259,6 +308,7 @@
                 triggering callback functions that call the character's movement member functions. These buttons are denoted by icons displayed next to them
                 on-screen. 
               </p>
+            
               
 <!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">move_hero_left</span>(channel):
     <span style="color: #008800; font-weight: bold">global</span> hero
