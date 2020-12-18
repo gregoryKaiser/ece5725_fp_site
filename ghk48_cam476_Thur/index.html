@@ -173,7 +173,8 @@
                   The health member field of the character is initialized to 100 and stores the amount of health the character
                   has. This value can be modified when the character collides with certain objects, as will be discussed later.
                   The attack member field stores the attack value of the last weapon item the hero collided with, while the defense
-                  member field stores the defense value of the last armor item the character collided with. Finally, the env_type 
+                  member field stores the defense value of the last armor item the character collided with. The inventory member field 
+                  stores a list of the names of the items the character has collided with. Finally, the env_type 
                   member field stores the environment type of the last item the hero collided with. The item, weapon and armor classes
                   will be discussed later in this section. 
                   <p></p>
@@ -181,19 +182,38 @@
                   which will be used later in the collision function to determine how the object should react upon a collision. The signaling
                   member field was not implemented in the single player version, but would be used to indicate when the character is signaling
                   to the god player that they need an item to be dropped into the game.
+                  <p></p>
+                  To control the character, the member functions moveRight, moveLeft, jump, and stopMoving and implemented to update the appropriate
+                  speed and direction member fields. The stop_signal and signal memner functions are meant as part of the multiplayer implementation, and toggle 
+                  the character's "signaling" field to 0 or 1. 
                   
                 </p>
                 Item
                 <p style="text-align: left;padding: 0px 40px;">
-                  test
+                  The item class includes an image, x, y, global_x, global_y, height, width, and physics_on much like the character class. It also has a speed_x and 
+                  speed_y, which would be set to the speed the background is moving when the character is pushing against the edge of the screen, and a health, which stores
+                  the health delivered to the hero when the hero collides with the item. The item 
+                  class is meant to store things that the hero can pick up, meaning objects of class item will dissappear or display on the character's person upon colliding with a character. This
+                  is accomplished through the member field "picked_up", which is initialized to False but is set to true in the collision function when the hero 
+                  collided with that item.
+                  <p></p>
+                  An item's display after it is picked up is determined using the equippable member field. If an item is initialized with equippable set to True, 
+                  logic in the member function draw will call draw_equipped and display the object on the body of the character that collides with it. Whether or not
+                  the item has collided with a character is stored in the boolean "picked_up" member field. 
+                  <p></p>
                 </p>
                 Weapon
                 <p style="text-align: left;padding: 0px 40px;">
-                  test
+                  The weapon class is a child of the item class. From it's parent, the weapon class inherits the fields image, name, x, y, global_x, global_y, width, height, and equippable member fields.
+                  In addition to the weapon's parent class fields, it also stores an image_l and image_r so that it may be pointing the same way as the hero when the hero turns and the weapon is equipped. 
+                  Finally, the weapon has an attack parameter, the value of which will transfer to a character that collides with it. 
+                  In addition to the draw function, the weapon class has a draw_equipped function that draws the weapon in front of the character after the character has collided with it. 
+        
                 </p>
                 Armor
                 <p style="text-align: left;padding: 0px 40px;">
-                  test
+                  The armor class is also a child of the item class, and is almost identical to the weapon class except that it has a defense field instead of an attack field, and it also has an env_type member field,
+                  which it gives to the character that collides with it. 
                 </p>
                 Obstacle
                 <p style="text-align: left;padding: 0px 40px;">
