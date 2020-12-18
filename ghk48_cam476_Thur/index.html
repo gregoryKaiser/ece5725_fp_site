@@ -470,23 +470,23 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <p style="text-align: left;padding: 0px 30px;">
                 To expand game functionality, more game logic will have to be added to handle the additional components. However, we did make the class structure general enough that a few of them can be implemented without too much hassle.
               </p>
-              <h4>Camera movement</h4>
+              <!-- <h4>Camera movement</h4> -->
               <p style="text-align: left;padding: 0px 30px;">
                 To move the camera and the rest of the level along with the character, we gave our displayable objects both x and y positions as well as global x and y position fields. By keeping track of a camera position, we could use the global positions to check which objects in a broader list of level objects are "visible" and only display those. This would allow the camera to track the character across a set of global level coordinates, while the objects come into and out of that frame at the appropriate positions. 
               </p>
-              <h4>Multiple levels/environments</h4>
+              <!-- <h4>Multiple levels/environments</h4> -->
               <p style="text-align: left;padding: 0px 30px;">
                 Designing our first level was not difficult, and only took a few lines to create the platforms for the character to jump on. By creating multiple levels in the game, a transition from one level to another could be triggered by either the character reaching a certain global position, or based on collision with a special object like a door, or using a special item. 
               </p>
-              <h4>Enemies and other moving assets</h4>
+              <!-- <h4>Enemies and other moving assets</h4> -->
               <p style="text-align: left;padding: 0px 30px;">
                 Creating intelligent enemies would be a difficult task, but one that would make the game much more interesting for a given player. Because the character class has an attack and defense field, the enemies could be made as characters which attempt to reach the hero's position, or follow a set trajectory. Adding in this other source of health-loss would also make the game more exciting for the player, who would now have to handle environmental effects as well as enemy onslaught.
               </p>
-              <h4>Custom TensorFlow-Lite model</h4>
+              <!-- <h4>Custom TensorFlow-Lite model</h4> -->
               <p style="text-align: left;padding: 0px 30px;">
                 Training a custom TensorFlow-Lite model would allow us to create a more specific set of items for the player to detect. As it stands, only trial and error will be able to identify objects that will spawn a valid item in-game. Adding in features that indicate what a "good" item looks like, and limiting the set of detected objects so that as many as possible are "valid" for gameplay, will make the user experience much more pleasurable.
               </p>
-              <h4>Menu Screen, Game Score, and Inventory Access</h4>
+              <!-- <h4>Menu Screen, Game Score, and Inventory Access</h4> -->
               <p style="text-align: left;padding: 0px 30px;">
                 Right now, the menu screens are very basic, and the user has no access to inventory items, though even consumed apples are there in storage. Adding a feature which allows the user to access and view his/her inventory would make it easier to acquire more equippable items, and swap out armor for what is needed in the current environment.
               </p>
