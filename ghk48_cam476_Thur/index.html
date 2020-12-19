@@ -114,14 +114,14 @@
                 <figure>
                 <img class="img-rounded" src="pics/rpi_front.jpg" alt="RPi front" style="width:40%;">
                 <img class="img-rounded" src="pics/rpi_back.jpg" alt="RPi front" style="width:40%;">
-                <figcaption>The Raspberry Pi with attached camera module. The device is held in the orientation shown on the left. On the right, the module is taped in place.</figcaption>
+                <figcaption><i>The Raspberry Pi with attached camera module. The device is held in the orientation shown on the left. On the right, the module is taped in place.</i></figcaption>
                 </figure><br></p>
               <p style="text-align: left;padding: 0px 30px;">
                 Our original idea had much higher expectations for the final result, but our overall implementation was similar:
                 <figure>
                 <img class="img-rounded" src="pics/concept_art_1.jpg" alt="RPi front" style="width:40%;">
                 <img class="img-rounded" src="pics/concept_art_2.jpg" alt="RPi front" style="width:15%;">
-                <figcaption>Sketches in the early stages of the project set a high bar for the hardware implementation.</figcaption>
+                <figcaption><i>Sketches in the early stages of the project set a high bar for the hardware implementation.</i></figcaption>
                 </figure><br>
               </p>
               <p style="text-align: left;padding: 0px 30px;">
@@ -129,7 +129,7 @@
                 <figure>
                 <img class="img-rounded" src="pics/rpi_side_open.jpg" alt="RPi front" style="width:30%;">
                 <img class="img-rounded" src="pics/rpi_camera_connection.jpg" alt="RPi front" style="width:20%;">
-                <figcaption>The ribbon cable has a specific orientation and is inserted carefully before wrapping it around the RPi case.</figcaption>
+                <figcaption><i>The ribbon cable has a specific orientation and is inserted carefully before wrapping it around the RPi case.</i></figcaption>
                 </figure><br>
               </p>
               <h3>PyGame and Class Design</h3>
@@ -345,7 +345,7 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
                 Of course, the player is also responsible for finding items in real life for the game to detect, and experimenting to find our limited set of detectable objects.
                 <figure>
                 <img class="img-rounded" src="pics/button_label.png" alt="RPi front" style="width:50%;">
-                <figcaption>The button functions are labeled with icons that indicate their function. The entire touchscreen is used as a jump button, and game variables are displayed in the upper-left corner.</figcaption>
+                <figcaption><i>The button functions are labeled with icons that indicate their function. The entire touchscreen is used as a jump button, and game variables are displayed in the upper-left corner.</i></figcaption>
                 </figure><br>
               </p>
               <hr id='collisions'>
@@ -485,7 +485,7 @@ recog_armor <span style="color: #333333">=</span> [<span style="background-color
                 <img class="img-rounded" src="pics/armor_frame.png" alt="RPi front" style="width:30%;"><br>
                 <img class="img-rounded" src="pics/scissors_detect.png" alt="RPi front" style="width:30%;">
                 <img class="img-rounded" src="pics/sword_frame.png" alt="RPi front" style="width:30%;"><br>
-                <figcaption>Examples of a detected object, along with its spawned item.</figcaption>
+                <figcaption><i>Examples of a detected object, along with its spawned item.</i></figcaption>
                 </figure><br>
               </p>
               <p style="text-align: left;padding: 0px 30px;">
@@ -571,7 +571,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <figure>
                 <img class="img-rounded" src="pics/ssh_connect.png" alt="banana" style="width:45%;">
                 <img class="img-rounded" src="pics/ssh_confirm.png" alt="banana" style="width:45%;">
-                <figcaption>After issuing the command to open the port, it is confirmed as open using the <code>netstat</code> command.</figcaption>
+                <figcaption><i>After issuing the command to open the port, it is confirmed as open using the <code>netstat</code> command.</i></figcaption>
               </figure><br>
               <p style="text-align: left;padding: 0px 30px;">
                 Once the creation of that open port was confirmed, we attempted to use the -L option of the ssh command to open a connection to a second device, this time from port 2000 on the second device, to the now open port 6009 on the class server:
@@ -593,14 +593,14 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 The <code>desktop_client.py</code> script creates a custom <code>Client</code> object which connects a desktop version of our game in a primitive form. User input is adapted to allow the use of the keyboard to move the player, and all game logic is performed locally in this script. At the end of a frame, <code>pickle</code> is used to package and send the entire displayable objects list to the server for display on the other end.  
                 <figure>
                 <img class="img-rounded" src="pics/laptop_multi.png" alt="banana" style="width:50%;">
-                <figcaption>Running on a laptop, the transfer of data is much faster while the server mirrors what the client is controlling. Hitboxes are shown to ease debugging of potential collision issues due to lag between data transfers.</figcaption>
+                <figcaption><i>Running on a laptop, the transfer of data is much faster while the server mirrors what the client is controlling. Hitboxes are shown to ease debugging of potential collision issues due to lag between data transfers.</i></figcaption>
               </figure><br>
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 The <code>rpi_client.py</code> script runs on the same logic as <code>desktop_client.py</code>, except that it can run without issue on the RPi, and the usual piTFT buttons can be used to control the game.
                 <figure>
                 <img class="img-rounded" src="pics/rpi_multi.png" alt="banana" style="width:50%;">
-                <figcaption>Running on a Raspberry Pi, the transfer of data is a bit slow while the server mirrors what the client is controlling using the PiTFT buttons.</figcaption>
+                <figcaption><i>Running on a Raspberry Pi, the transfer of data is a bit slow while the server mirrors what the client is controlling using the PiTFT buttons.</i></figcaption>
               </figure><br>
               </p>
               <p style="text-align: left;padding: 0px 30px;">
@@ -654,13 +654,13 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 Testing the gravity and collision logic was by far the most grueling cycle of debugging. Whenever we made a small change, the results were tested by jumping around and making observations. Tweaks to hitboxes, the magnitude of gravity, the magnitude of item drag, and the placement of objects, all required a rapid cycle of small-change unit tests. Eventually, we settled on a gravity that was strong enough to require some skill to run and jump at the same time, but not so strong as to make navigation impossible. Drag was set such that items that pop-in from an object detection phase skid to a stop on the floor platform, without sliding all the way to the left. While the collision logic went through a number of iterations, the method we ended up with causes a nice animated jitter for all objects with physics. This gives a clear indication that those objects are "real" and an be interacted with.
                 <figure>
                 <img class="img-rounded" src="pics/apple_frame.png" alt="banana" style="width:30%;">
-                <figcaption>Though the items are spawned with significant rightward speed, they come to a stop on the floor before reaching the block on the left.</figcaption>
+                <figcaption><i>Though the items are spawned with significant rightward speed, they come to a stop on the floor before reaching the block on the left.</i></figcaption>
               </figure><br></p>
               <p style="text-align: left;padding: 0px 30px;">
                 We also tested the equipping-item logic many times. This involves detecting that the hero has collided with an equippable item, and then drawing it as an equipped image for the rest of the game instead of giving it the usual item physics.
                 <figure>
                 <img class="img-rounded" src="pics/sword_equipped.png" alt="banana" style="width:30%;">
-                <figcaption>After working with small offsets from the hero's position, equipped armor and blades appear near the hero at all times.</figcaption>
+                <figcaption><i>After working with small offsets from the hero's position, equipped armor and blades appear near the hero at all times.</i></figcaption>
               </figure><br>
               </p>
               <h3>Camera and well-detected objects</h3>
@@ -671,7 +671,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 <img class="img-rounded" src="pics/orange_detect.png" alt="orange" style="width:30%;"><br>
                 <img class="img-rounded" src="pics/tie_detect.png" alt="tie" style="width:30%;">
                 <img class="img-rounded" src="pics/scissors_detect.png" alt="scissors" style="width:30%;">
-                <figcaption>Some examples of easily detected objects for use in-game. The fruit all spawn an apple, whereas the tie spawns armor, and the scissors spawn a blade.</figcaption>
+                <figcaption><i>Some examples of easily detected objects for use in-game. The fruit all spawn an apple, whereas the tie spawns armor, and the scissors spawn a blade.</i></figcaption>
               </figure><br>
               </p>
               <h3>Multiplayer testing/debugging</h3>
@@ -695,7 +695,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <figure>
                 <img class="img-rounded" src="pics/concept_game.png" alt="concept" style="width:40%;">
                 <img class="img-rounded" src="pics/button_identify.jpg" alt="final im" style="width:40%;"><br>
-                <figcaption>Compared to our original game concept, we did a great job of going beyond the look and feel that we were aiming for.</figcaption>
+                <figcaption><i>Compared to our original game concept, we did a great job of going beyond the look and feel that we were aiming for.</i></figcaption>
               </figure><br>
               <p style="text-align: left;padding: 0px 30px;">
                 Because of the condensed timeline this semester, we also practiced good project management by accomplishing milestones in an incremental manner every week. We had concrete goals to achieve, and although we did not adhere perfectly to the original schedule, we made intelligent choices to modify it along the way. There was always significant progress each week, either in the development of a new capability, or by implementing a solution to a previous week's problem. Scheduling synchronous meetings across time zones and busy schedules was difficult.
