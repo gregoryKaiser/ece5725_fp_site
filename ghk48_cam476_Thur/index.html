@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>It's Dangerous To Go Alone</title>
+    <title>ECE 5725: It's Dangerous To Go Alone</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -140,6 +140,10 @@
                 location on the screen.
               </p>
               <h4>Classes</h4>
+              <figure>
+                <img class="img-rounded" src="pics/hierarchy.png" alt="RPi front" style="width:60%;">
+                <figcaption><i>The overall structure of our classes in diagram form.</i></figcaption>
+                </figure><br>
               <p style="text-align: left;padding: 0px 40px;">
                 <b>Character</b>
               </p>
@@ -367,12 +371,15 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
                 found collided objects have already been removed from this list, only objects for which a collision was not yet found will be checked. The base case is triggered when the passed list of objects is empty, wherin it returns 
                 list of collided objects. 
               </p>
+              <figure>
+                <img class="img-rounded" src="pics/recursive.png" alt="RPi front" style="width:60%;"><br><br>
+                <figcaption><i>(1) Object one is checked against the rest of the objects in the list. A collision is found with object two, which marks object 1 as having collided. Objects 1 and 2 are removed and added to the collided list. (2) Object 3 is checked against the remaining objects in the list. No collisions are found, so object 3 is simply removed. (3) Object 4 is checked against the remaining items in the list. A collision with object 5 is found, so both are removed and added to the collided list. (4) Object 6 is removed. The collided list is returned.</i></figcaption>
+                </figure><br>
               <p style="text-align: left;padding: 0px 30px;">
                 After the helper function is finished executing, a list of the collided objects is returned to the main collision function. The list of objects originally passed to the collide function is iterated through; if the object is
                 also in the collided objects list, the objects x or y direction is edited, depending on the direction passed to the function. If checking for x collisions, the function will set moving objects back by their width in the reverse 
                 direction the object was moving. This prevents objects from getting stuck to each other when they collide. In the y direction, collided objects will be have whatever move they just made reversed by subtracting the object's speed
                 field from the object's y position. This is what prevents objects from falling through other objects. Finally, at the end of each iteration of the loop the object's hitbox is updated with the new x and y positions of the object. 
-
               </p>
               <p style="text-align: left;padding: 0px 30px;">
 
@@ -679,7 +686,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 Testing the multiplayer components, unlike the rest of the project, were much less fun to test and debug. The results of tests of this nature are much less visual, and have more to do with whether or not our settings are correct. Testing these server and client scripts was more about frequent communication between the two of us across networks, with screen sharing of some kind enabled to allow both of us to understand what was happening. By calling out when the server is open, and with what settings, we were able to try multiple permutations of the IP address and port fields to hunt down our problems. Using the command given to us by Anthony Ngoma also allowed us to test our ssh command to rule that out as a potential source of error. Working with the TA's over office hours also helped us aim some brain power into understanding which ports are meant to connect, and how.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
-                Once we decided to go with a local option, porting the game script into either the desktop version of the client, or the raspberry pi client, was simple. However, two scripts were developed for use on a laptop in order to confirm that a test object was being transferred at all. This helped debug issues with our use of the <code>pickle</code> library, and with the socket connection as an isolated problem. The scripts <code>multi_server.py</code> and <code>multi_client.py</code> contained a single identical <code>tst_obj</code> with a few fields inside. They defined a custom <code>Server</code> and <code>Client</code> class, respectively. By opening a socket connection and just transferring this single test object from the client to the server, repeatedly, we were able to confirm that <code>pickle</code> was working in conjunction with <code>socket</code> to transfer our data.
+                Once we decided to go with a local option, porting the game script into either the desktop version of the client, or the raspberry pi client, was simple. However, two scripts were developed for use on a laptop in order to confirm that a test object was being transferred at all. This helped debug issues with our use of the <code>pickle</code> library, and with the socket connection as an isolated problem. The scripts <code>multi_server.py</code> and <code>multi_client.py</code> contained a single identical <code>tst_obj</code> with a few fields inside. A very helpful <a href="https://stackoverflow.com/questions/47391774/python-send-and-receive-objects-through-sockets/47396267" target="_blank">StackOverflow</a> post helped us develop these scripts. They defined a custom <code>Server</code> and <code>Client</code> class, respectively. By opening a socket connection and just transferring this single test object from the client to the server, repeatedly, we were able to confirm that <code>pickle</code> was working in conjunction with <code>socket</code> to transfer our data.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 Once the desktop and RPi version of the client, as well as the adapted server script, were complete, a bit of testing was required to make sure that user input on the desktop side was registered correctly. Also, due to the fact that pickle cannot package Pygame surfaces, some extra development had to be done to convert the <code>image</code> member field to an <code>imagepath</code> for each object on-screen. The hitboxes were also re-enabled, as seen in the demonstration video for the local multiplayer component, to debug collision issues and figure out if the hitboxes are accurate, or if bugs were a result of lag across the local connection.
@@ -820,6 +827,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
           <a href="https://www.techwithtim.net/tutorials/python-online-game-tutorial/server/" target="_blank">TechWithTim, Online server multiplayer game.</a><br>
           <a href="https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/pitft-pygame-tips" target="_blank">Adafruit Wheezy downgrade.</a><br>
           <a href="https://learn.adafruit.com/diy-wifi-raspberry-pi-touch-cam/pi-setup" target="_blank">DIY WiFi Raspberry Pi Touchscreen Camera.</a><br>
+          <a href="https://stackoverflow.com/questions/47391774/python-send-and-receive-objects-through-sockets/47396267" target="_blank">Python send and receive objects through Sockets</a><br>
           <a href="https://skovira.ece.cornell.edu/ece5725/" target="_blank">ECE 5725: Design with Embedded Operating Systems.</a><br>
           <a href="http://hilite.me/" target="_blank">Hilite for Code Inclusion.</a><br>
           <!-- <a href="https://pygame.org" target="_blank">Pygame</a><br> -->
@@ -2639,6 +2647,416 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
   pygame<span style="color: #333333">.</span>quit()
   cv2<span style="color: #333333">.</span>destroyAllWindows()
   videostream<span style="color: #333333">.</span>stop()
+  </pre></div>
+      <h3>classes_multi.py</h3>
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#####</span>
+  <span style="color: #888888"># It&#39;s Dangerous to Go Alone</span>
+  <span style="color: #888888"># Gregory Kaiser (ghk48)</span>
+  <span style="color: #888888"># Caeli MacLennan (cam476)</span>
+  <span style="color: #888888"># December 2020</span>
+  <span style="color: #888888">######</span>
+  <span style="color: #888888"># classes_multi.py is an adapted old version of classes.py</span>
+  <span style="color: #888888"># which is modified to take image path strings, instead of pygame surface</span>
+  <span style="color: #888888"># to its displayable objects. This is done so that pickle can package</span>
+  <span style="color: #888888"># and send the data without error.</span>
+  
+  <span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pygame</span>
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">character</span>(<span style="color: #007020">object</span>):
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, imagepath, x, y, glob_x, glob_y, width, height):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> y
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>glob_x <span style="color: #333333">=</span> glob_x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>glob_y <span style="color: #333333">=</span> glob_y
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>width <span style="color: #333333">=</span> width
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>height <span style="color: #333333">=</span> height
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #888888">#set high/low during button press</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #888888">#set high when jumping</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath <span style="color: #333333">=</span> imagepath <span style="color: #888888">#uses image path instead of pygame surface</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>health <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">100</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>inventory <span style="color: #333333">=</span> []
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>attack <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>defense <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>signaling <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>physics_on <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">2</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>env_type <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;none&quot;</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+  
+      <span style="color: #888888">#generic draw function for hitbox and image</span>
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw</span>(<span style="color: #007020">self</span>, win):
+          <span style="color: #888888">#pygame surface made here instead of upon initialization</span>
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(image_disp,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          pygame<span style="color: #333333">.</span>draw<span style="color: #333333">.</span>rect(win, (<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox, <span style="color: #0000DD; font-weight: bold">2</span>)
+          win<span style="color: #333333">.</span>blit(image_disp, (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y))
+          <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>signaling:
+              win<span style="color: #333333">.</span>blit(image_disp, (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y))
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">moveRight</span>(<span style="color: #007020">self</span>): <span style="color: #888888">#upon button press</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">moveLeft</span>(<span style="color: #007020">self</span>): <span style="color: #888888">#upon button press</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">3</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">jump</span>(<span style="color: #007020">self</span>): <span style="color: #888888">#upon button press</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">20</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">stopMoving</span>(<span style="color: #007020">self</span>): <span style="color: #888888">#upon button release</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">stop_signal</span>(<span style="color: #007020">self</span>): <span style="color: #888888">#upon signal button release</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>signaling <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">signal</span>(<span style="color: #007020">self</span>): <span style="color: #888888">#upon button press</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>signaling <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">item</span>(<span style="color: #007020">object</span>):
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, imagepath, name, x, y, global_x, global_y, width, height, equippable):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>name <span style="color: #333333">=</span> name
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> y
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>global_x <span style="color: #333333">=</span> global_x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>global_y <span style="color: #333333">=</span> global_y
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span> 
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span> 
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>width <span style="color: #333333">=</span> width
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>height <span style="color: #333333">=</span> height
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>equippable <span style="color: #333333">=</span> equippable
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>picked_up <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>env_type <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;none&quot;</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>health <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">10</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath <span style="color: #333333">=</span> imagepath <span style="color: #888888">#uses image path instead of pygame surface</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">+</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">+</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>physics_on <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw</span>(<span style="color: #007020">self</span>, win, hero):
+          <span style="color: #888888">#pygame surface made here instead of upon initialization</span>
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(image_disp,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          <span style="color: #888888">#pygame.draw.rect(win, (255,0,0), self.hitbox, 2) #optional hitbox</span>
+          win<span style="color: #333333">.</span>blit(image_disp, (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y))
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">weapon</span>(item):
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, image, name, x, y, global_x, global_y, width, height, equippable, attack):
+          <span style="color: #007020">super</span>()<span style="color: #333333">.</span>__init__(image, name, x, y, global_x, global_y, width, height, equippable)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>attack <span style="color: #333333">=</span> attack
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw</span>(<span style="color: #007020">self</span>, win, hero):
+          <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">self</span><span style="color: #333333">.</span>picked_up):
+              <span style="color: #007020">self</span><span style="color: #333333">.</span>draw_equipped(win, hero)
+          <span style="color: #008800; font-weight: bold">else</span>:
+              image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+              image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(image_disp,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+              <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+              <span style="color: #888888">#pygame.draw.rect(win, (255,0,0), self.hitbox, 2) #optional hitbox</span>
+              win<span style="color: #333333">.</span>blit(image_disp, (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y))
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw_equipped</span>(<span style="color: #007020">self</span>, win, hero):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> hero<span style="color: #333333">.</span>x<span style="color: #333333">+</span><span style="color: #007020">int</span>(<span style="color: #007020">self</span><span style="color: #333333">.</span>width<span style="color: #333333">/</span><span style="color: #0000DD; font-weight: bold">2</span>)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> hero<span style="color: #333333">.</span>y<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">4</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          <span style="color: #888888">#pygame surface made here instead of upon initialization</span>
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(hero_im,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+          <span style="color: #888888">#pygame.draw.rect(win, (255,0,0), self.hitbox, 2) #optional hitbox</span>
+          win<span style="color: #333333">.</span>blit(image_disp, (hero<span style="color: #333333">.</span>x, hero<span style="color: #333333">.</span>y))
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">armor</span>(item):
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, image, name, x, y, global_x, global_y, width, height, equippable, defense, env_type, body_location):
+          <span style="color: #007020">super</span>()<span style="color: #333333">.</span>__init__(image, name, x, y, global_x, global_y, width, height, equippable)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>defense <span style="color: #333333">=</span> defense
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>env_type <span style="color: #333333">=</span> env_type
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>body_location <span style="color: #333333">=</span> body_location
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw</span>(<span style="color: #007020">self</span>, win, hero):
+          <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">self</span><span style="color: #333333">.</span>picked_up):
+              <span style="color: #007020">self</span><span style="color: #333333">.</span>draw_equipped(win, hero)
+          <span style="color: #008800; font-weight: bold">else</span>:<span style="color: #888888">#draw on ground at initial position</span>
+              <span style="color: #888888">#pygame surface made here instead of upon initialization</span>
+              image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+              image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(image_disp,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+              <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x , <span style="color: #007020">self</span><span style="color: #333333">.</span>y , <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+              <span style="color: #888888">#pygame.draw.rect(win, (255,0,0), self.hitbox, 2)</span>
+              win<span style="color: #333333">.</span>blit(image_disp, (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y))
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw_equipped</span>(<span style="color: #007020">self</span>, win, hero):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> hero<span style="color: #333333">.</span>x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> hero<span style="color: #333333">.</span>y<span style="color: #333333">+</span><span style="color: #007020">self</span><span style="color: #333333">.</span>height
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          <span style="color: #888888">#pygame.draw.rect(win, (255,0,0), self.hitbox, 2) #optional hitbox</span>
+          <span style="color: #888888">#pygame surface made here instead of upon initialization</span>
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(image_disp,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+          <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>body_location <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;head&quot;</span>:
+              win<span style="color: #333333">.</span>blit(image_disp, (hero<span style="color: #333333">.</span>x <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>, hero<span style="color: #333333">.</span>y <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">10</span>))
+  
+          <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>body_location <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;feet&quot;</span>:
+              win<span style="color: #333333">.</span>blit(image_disp, (hero<span style="color: #333333">.</span>x <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>, hero<span style="color: #333333">.</span>y <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">10</span>))
+  
+          <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>body_location <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;legs&quot;</span>:
+              win<span style="color: #333333">.</span>blit(image_disp, (hero<span style="color: #333333">.</span>x <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>, hero<span style="color: #333333">.</span>y <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">10</span>))
+              
+          <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>body_location <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;torso&quot;</span>:
+              win<span style="color: #333333">.</span>blit(image_disp, (hero<span style="color: #333333">.</span>x<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">5</span>, hero<span style="color: #333333">.</span>y <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">28</span>))
+  
+  <span style="color: #888888">#class for global objects/effects</span>
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">environment</span>(<span style="color: #007020">object</span>):
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, global_x, effect_length, env_type, attack):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>global_x <span style="color: #333333">=</span> global_x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>effect_length <span style="color: #333333">=</span> effect_length
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>type <span style="color: #333333">=</span> env_type
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>attack <span style="color: #333333">=</span> attack
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>physics_on <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+      
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">do_harm</span>(<span style="color: #007020">self</span>, hero): <span style="color: #888888">#attack the player with environment effect</span>
+          <span style="color: #008800; font-weight: bold">if</span> hero<span style="color: #333333">.</span>env_type <span style="color: #333333">!=</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>type:
+              hero<span style="color: #333333">.</span>health <span style="color: #333333">-=</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>attack
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">obstacle</span>(<span style="color: #007020">object</span>):
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, imagepath, x, y, glob_x, glob_y, width, height, env_type):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> y
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>glob_x <span style="color: #333333">=</span> glob_x
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>glob_y <span style="color: #333333">=</span> glob_y
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>width <span style="color: #333333">=</span> width
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>height <span style="color: #333333">=</span> height
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedx <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #888888">#move with background</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #888888">#always zero</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>type <span style="color: #333333">=</span> env_type
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath <span style="color: #333333">=</span> imagepath <span style="color: #888888">#use image path instead of pygame surface</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>physics_on <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">draw</span>(<span style="color: #007020">self</span>, win):
+          <span style="color: #888888">#pygame surface made here instead of upon initialization</span>
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>image<span style="color: #333333">.</span>load(<span style="color: #007020">self</span><span style="color: #333333">.</span>imagepath)
+          image_disp <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>transform<span style="color: #333333">.</span>scale(image_disp,(<span style="color: #007020">self</span><span style="color: #333333">.</span>width,<span style="color: #007020">self</span><span style="color: #333333">.</span>height))
+          <span style="color: #888888">#self.hitbox = (self.x, self.y + 25, self.width, self.height)</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y, <span style="color: #007020">self</span><span style="color: #333333">.</span>width, <span style="color: #007020">self</span><span style="color: #333333">.</span>height)
+          pygame<span style="color: #333333">.</span>draw<span style="color: #333333">.</span>rect(win, (<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #007020">self</span><span style="color: #333333">.</span>hitbox, <span style="color: #0000DD; font-weight: bold">2</span>)
+          win<span style="color: #333333">.</span>blit(image_disp, (<span style="color: #007020">self</span><span style="color: #333333">.</span>x, <span style="color: #007020">self</span><span style="color: #333333">.</span>y))
+  
+  <span style="color: #888888">#helper function for collide</span>
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">find_collisions</span>(obj_list):
+      collision_list <span style="color: #333333">=</span> []
+      
+      obj_list_copy <span style="color: #333333">=</span> obj_list[:]
+      <span style="color: #888888">#base case:</span>
+      <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">len</span>(obj_list) <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+          <span style="color: #008800; font-weight: bold">return</span> collision_list
+  
+      <span style="color: #888888">#select the next object to compare and remove it from the list</span>
+      curr_obj <span style="color: #333333">=</span> obj_list_copy[<span style="color: #0000DD; font-weight: bold">0</span>]
+      obj_list_copy<span style="color: #333333">.</span>remove(curr_obj)
+      
+      <span style="color: #888888">#if the object is an equipped item, ignore collisions</span>
+      <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #000000; font-weight: bold">not</span>(<span style="color: #007020">isinstance</span>(curr_obj,item) <span style="color: #000000; font-weight: bold">and</span> curr_obj<span style="color: #333333">.</span>equippable <span style="color: #000000; font-weight: bold">and</span> curr_obj<span style="color: #333333">.</span>picked_up)):
+          <span style="color: #888888">#identify rect for obj hitbox</span>
+          rect1 <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>Rect(curr_obj<span style="color: #333333">.</span>hitbox)
+          collide_flag <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+          <span style="color: #008800; font-weight: bold">for</span> obj <span style="color: #000000; font-weight: bold">in</span> obj_list_copy:
+              <span style="color: #888888">#if the object is an equipped item, ignore collisions</span>
+              <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #000000; font-weight: bold">not</span>(<span style="color: #007020">isinstance</span>(obj,item) <span style="color: #000000; font-weight: bold">and</span> obj<span style="color: #333333">.</span>equippable <span style="color: #000000; font-weight: bold">and</span> obj<span style="color: #333333">.</span>picked_up)):
+                  rect2 <span style="color: #333333">=</span> pygame<span style="color: #333333">.</span>Rect(obj<span style="color: #333333">.</span>hitbox)
+                  <span style="color: #008800; font-weight: bold">if</span> rect1<span style="color: #333333">.</span>colliderect(rect2):
+                      <span style="color: #888888">#collsion detected; collision flag for curr_obj = True</span>
+                      <span style="color: #888888">#append obj to collision list</span>
+                      collision_list<span style="color: #333333">.</span>append(obj)
+                      obj_list_copy<span style="color: #333333">.</span>remove(obj)
+                      collide_flag <span style="color: #333333">=</span> <span style="color: #007020">True</span>
+                      
+                      <span style="color: #888888">#check for item collide with hero</span>
+                      <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">isinstance</span>(curr_obj, character) <span style="color: #000000; font-weight: bold">and</span> <span style="color: #007020">isinstance</span>(obj,item)):
+                          obj<span style="color: #333333">.</span>picked_up <span style="color: #333333">=</span> <span style="color: #007020">True</span>
+                          curr_obj<span style="color: #333333">.</span>inventory<span style="color: #333333">.</span>append(obj)
+                          <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">isinstance</span>(obj,armor)):
+                              curr_obj<span style="color: #333333">.</span>env_type <span style="color: #333333">=</span> obj<span style="color: #333333">.</span>env_type
+                          <span style="color: #008800; font-weight: bold">elif</span>(<span style="color: #007020">isinstance</span>(obj,weapon)):
+                              <span style="color: #008800; font-weight: bold">pass</span>
+                          <span style="color: #008800; font-weight: bold">else</span>:
+                              curr_obj<span style="color: #333333">.</span>health <span style="color: #333333">+=</span> obj<span style="color: #333333">.</span>health
+                      <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">isinstance</span>(curr_obj,item) <span style="color: #000000; font-weight: bold">and</span> <span style="color: #007020">isinstance</span>(obj,character)):
+                          curr_obj<span style="color: #333333">.</span>picked_up <span style="color: #333333">=</span> <span style="color: #007020">True</span>
+                          obj<span style="color: #333333">.</span>inventory<span style="color: #333333">.</span>append(curr_obj)
+                          <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">isinstance</span>(curr_obj,armor)):
+                              obj<span style="color: #333333">.</span>env_type <span style="color: #333333">=</span> curr_obj<span style="color: #333333">.</span>env_type
+                          <span style="color: #008800; font-weight: bold">elif</span>(<span style="color: #007020">isinstance</span>(curr_obj,weapon)):
+                              <span style="color: #008800; font-weight: bold">pass</span>
+                          <span style="color: #008800; font-weight: bold">else</span>:
+                              obj<span style="color: #333333">.</span>health <span style="color: #333333">+=</span> curr_obj<span style="color: #333333">.</span>health
+          <span style="color: #008800; font-weight: bold">if</span> collide_flag:
+              <span style="color: #888888">#curr_object collided with something; add it to the collide list</span>
+              collision_list<span style="color: #333333">.</span>append(curr_obj)
+      <span style="color: #888888">#search the remaining obj_list for collisions:</span>
+      <span style="color: #008800; font-weight: bold">return</span> collision_list <span style="color: #333333">+</span> find_collisions(obj_list_copy)
+  
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">collide</span>(obj_list, direc):
+      collided <span style="color: #333333">=</span> find_collisions(obj_list)
+      <span style="color: #008800; font-weight: bold">for</span> obj <span style="color: #000000; font-weight: bold">in</span> obj_list:
+          <span style="color: #008800; font-weight: bold">if</span> obj <span style="color: #000000; font-weight: bold">in</span> collided:
+              <span style="color: #888888">#object has collided with something; bump back by dir speed</span>
+              <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">isinstance</span>(obj, item):
+                  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> obj<span style="color: #333333">.</span>equippable:
+                      <span style="color: #008800; font-weight: bold">if</span> obj<span style="color: #333333">.</span>picked_up:
+                          obj_list<span style="color: #333333">.</span>remove(obj)
+  
+              <span style="color: #008800; font-weight: bold">if</span> direc <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;x&#39;</span>:
+                  <span style="color: #008800; font-weight: bold">if</span> obj<span style="color: #333333">.</span>speedx <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                      <span style="color: #888888">#bump forward by width</span>
+                      obj<span style="color: #333333">.</span>x <span style="color: #333333">+=</span> obj<span style="color: #333333">.</span>width
+                  <span style="color: #008800; font-weight: bold">elif</span> obj<span style="color: #333333">.</span>speedx <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                      <span style="color: #888888">#bump backward by width</span>
+                      obj<span style="color: #333333">.</span>x <span style="color: #333333">-=</span> obj<span style="color: #333333">.</span>width
+              <span style="color: #008800; font-weight: bold">else</span>:
+                  obj<span style="color: #333333">.</span>y <span style="color: #333333">-=</span> obj<span style="color: #333333">.</span>speedy
+                  obj<span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+                  <span style="color: #008800; font-weight: bold">if</span> obj<span style="color: #333333">.</span>speedy <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                      <span style="color: #888888">#falling onto platform, set vertical speed to zero</span>
+                      obj<span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+              <span style="color: #888888">#update hitbox</span>
+              obj<span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (obj<span style="color: #333333">.</span>x, obj<span style="color: #333333">.</span>y, obj<span style="color: #333333">.</span>width, obj<span style="color: #333333">.</span>height)
+              
+  
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">move_objs</span>(obj_list, direc):
+      <span style="color: #008800; font-weight: bold">if</span> direc <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;x&#39;</span>:
+          <span style="color: #008800; font-weight: bold">for</span> obj <span style="color: #000000; font-weight: bold">in</span> obj_list:
+              <span style="color: #888888">#if(isinstance(obj,item) and not obj.picked_up):</span>
+              obj<span style="color: #333333">.</span>x <span style="color: #333333">+=</span> obj<span style="color: #333333">.</span>speedx
+              <span style="color: #888888">#update hitbox</span>
+              obj<span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (obj<span style="color: #333333">.</span>x, obj<span style="color: #333333">.</span>y, obj<span style="color: #333333">.</span>width, obj<span style="color: #333333">.</span>height)
+      <span style="color: #008800; font-weight: bold">else</span>:
+          <span style="color: #008800; font-weight: bold">for</span> obj <span style="color: #000000; font-weight: bold">in</span> obj_list:
+              <span style="color: #888888">#if(isinstance(obj,item) and not obj.picked_up):</span>
+              obj<span style="color: #333333">.</span>y <span style="color: #333333">+=</span> obj<span style="color: #333333">.</span>speedy
+              <span style="color: #888888">#gravity</span>
+              <span style="color: #008800; font-weight: bold">if</span> obj<span style="color: #333333">.</span>physics_on<span style="color: #333333">==</span><span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #000000; font-weight: bold">or</span> obj<span style="color: #333333">.</span>physics_on<span style="color: #333333">==</span><span style="color: #0000DD; font-weight: bold">2</span>:
+                  <span style="color: #008800; font-weight: bold">if</span>(obj<span style="color: #333333">.</span>speedy<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">20</span>):
+                      obj<span style="color: #333333">.</span>speedy <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">2</span>
+              <span style="color: #888888">#drag</span>
+              <span style="color: #008800; font-weight: bold">if</span> obj<span style="color: #333333">.</span>speedy <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                  obj<span style="color: #333333">.</span>speedy <span style="color: #333333">-=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+              <span style="color: #008800; font-weight: bold">elif</span> obj<span style="color: #333333">.</span>speedy <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                  obj<span style="color: #333333">.</span>speedy <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+              <span style="color: #008800; font-weight: bold">if</span> obj<span style="color: #333333">.</span>speedx <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> obj<span style="color: #333333">.</span>physics_on <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+                  obj<span style="color: #333333">.</span>speedx <span style="color: #333333">-=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+              <span style="color: #008800; font-weight: bold">elif</span> obj<span style="color: #333333">.</span>speedx <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> obj<span style="color: #333333">.</span>physics_on <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+                  obj<span style="color: #333333">.</span>speedx <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+              obj<span style="color: #333333">.</span>hitbox <span style="color: #333333">=</span> (obj<span style="color: #333333">.</span>x, obj<span style="color: #333333">.</span>y, obj<span style="color: #333333">.</span>width, obj<span style="color: #333333">.</span>height)
+              <span style="color: #888888">#update hitbox</span>
+  </pre></div>
+  
+      <h3>multi_server.py</h3>
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#####</span>
+  <span style="color: #888888"># It&#39;s Dangerous to Go Alone</span>
+  <span style="color: #888888"># Gregory Kaiser (ghk48)</span>
+  <span style="color: #888888"># Caeli MacLennan (cam476)</span>
+  <span style="color: #888888"># December 2020</span>
+  <span style="color: #888888">######</span>
+  <span style="color: #888888"># multi_server.py is a test script developed to recieve a single</span>
+  <span style="color: #888888"># object over a local network</span>
+  
+  <span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">socket</span><span style="color: #333333">,</span> <span style="color: #0e84b5; font-weight: bold">pickle</span>
+  <span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">classes_multi</span>
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">tst_obj</span>:
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, img, x_pos, y_pos, x_speed, y_speed):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>image <span style="color: #333333">=</span> img
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> x_pos
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> y_pos
+          <span style="color: #007020">self</span><span style="color: #333333">.</span> speedx <span style="color: #333333">=</span> x_speed
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> y_speed
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Server</span>:
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, HOST, PORT):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>HOST <span style="color: #333333">=</span> HOST
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>PORT <span style="color: #333333">=</span> PORT
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>s <span style="color: #333333">=</span> <span style="color: #007020">None</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>conn <span style="color: #333333">=</span> <span style="color: #007020">None</span>
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>addr <span style="color: #333333">=</span> <span style="color: #007020">None</span>
+      
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">connect</span>(<span style="color: #007020">self</span>):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>s <span style="color: #333333">=</span> socket<span style="color: #333333">.</span>socket(socket<span style="color: #333333">.</span>AF_INET, socket<span style="color: #333333">.</span>SOCK_STREAM)
+          <span style="color: #008800; font-weight: bold">try</span>:
+              <span style="color: #007020">self</span><span style="color: #333333">.</span>s<span style="color: #333333">.</span>bind((<span style="color: #007020">self</span><span style="color: #333333">.</span>HOST, <span style="color: #007020">self</span><span style="color: #333333">.</span>PORT))
+          <span style="color: #008800; font-weight: bold">except</span> socket<span style="color: #333333">.</span>error <span style="color: #008800; font-weight: bold">as</span> e:
+              <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(e))
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>s<span style="color: #333333">.</span>listen(<span style="color: #0000DD; font-weight: bold">1</span>)
+          <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Waiting for a connection&quot;</span>)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>conn, <span style="color: #007020">self</span><span style="color: #333333">.</span>addr <span style="color: #333333">=</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>s<span style="color: #333333">.</span>accept()
+          <span style="color: #008800; font-weight: bold">print</span>( <span style="background-color: #fff0f0">&quot;Connected by: &quot;</span>, <span style="color: #007020">self</span><span style="color: #333333">.</span>addr)
+          <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>conn, <span style="color: #007020">self</span><span style="color: #333333">.</span>addr
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_data</span>(<span style="color: #007020">self</span>):
+          data <span style="color: #333333">=</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>conn<span style="color: #333333">.</span>recv(<span style="color: #0000DD; font-weight: bold">4096</span>)
+          data_var <span style="color: #333333">=</span> pickle<span style="color: #333333">.</span>loads(data)
+          <span style="color: #008800; font-weight: bold">return</span> data_var
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">close_connection</span>(<span style="color: #007020">self</span>):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>conn<span style="color: #333333">.</span>close()
+  
+  hostname <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;localhost&#39;</span>
+  port <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">50007</span>
+  server <span style="color: #333333">=</span> Server(hostname, port)
+  server<span style="color: #333333">.</span>connect()
+  
+  <span style="color: #008800; font-weight: bold">while</span>(<span style="color: #007020">True</span>):
+      <span style="color: #008800; font-weight: bold">try</span>:
+          data_unpack <span style="color: #333333">=</span> server<span style="color: #333333">.</span>get_data()
+          <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;Data recieved:&#39;</span>,data_unpack)
+      <span style="color: #008800; font-weight: bold">except</span>:
+          <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Closing connection&quot;</span>)
+          server<span style="color: #333333">.</span>close_connection()
+          <span style="color: #008800; font-weight: bold">break</span>
+  </pre></div>
+  
+      <h3>multi_client.py</h3>
+<!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#####</span>
+  <span style="color: #888888"># It&#39;s Dangerous to Go Alone</span>
+  <span style="color: #888888"># Gregory Kaiser (ghk48)</span>
+  <span style="color: #888888"># Caeli MacLennan (cam476)</span>
+  <span style="color: #888888"># December 2020</span>
+  <span style="color: #888888">######</span>
+  <span style="color: #888888"># multi_client.py is a test script developed to test sending a single</span>
+  <span style="color: #888888"># object over a local network</span>
+  
+  <span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">socket</span><span style="color: #333333">,</span> <span style="color: #0e84b5; font-weight: bold">pickle</span>
+  <span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">classes_multi</span>
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">tst_obj</span>:
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, img, x_pos, y_pos, x_speed, y_speed):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>image <span style="color: #333333">=</span> img
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>x <span style="color: #333333">=</span> x_pos
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>y <span style="color: #333333">=</span> y_pos
+          <span style="color: #007020">self</span><span style="color: #333333">.</span> speedx <span style="color: #333333">=</span> x_speed
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>speedy <span style="color: #333333">=</span> y_speed
+  
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Client</span>:
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, HOST, PORT):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>HOST <span style="color: #333333">=</span> HOST
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>PORT <span style="color: #333333">=</span> PORT
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>s <span style="color: #333333">=</span> <span style="color: #007020">None</span>
+  
+      <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">connect</span>(<span style="color: #007020">self</span>):
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>s <span style="color: #333333">=</span> socket<span style="color: #333333">.</span>socket(socket<span style="color: #333333">.</span>AF_INET, socket<span style="color: #333333">.</span>SOCK_STREAM)
+          <span style="color: #007020">self</span><span style="color: #333333">.</span>s<span style="color: #333333">.</span>connect((<span style="color: #007020">self</span><span style="color: #333333">.</span>HOST, <span style="color: #007020">self</span><span style="color: #333333">.</span>PORT))
+  
+  
+  hostname <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;localhost&#39;</span><span style="color: #888888">#&#39;192.168.56.1&#39;</span>
+  port <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">50007</span>
+  testing <span style="color: #333333">=</span> tst_obj(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">2</span>, <span style="color: #0000DD; font-weight: bold">2</span>)
+  client <span style="color: #333333">=</span> Client(hostname, port)
+  client<span style="color: #333333">.</span>connect()
+  
+  <span style="color: #008800; font-weight: bold">while</span>(<span style="color: #007020">True</span>):
+      <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;sending&quot;</span>)
+      data_send <span style="color: #333333">=</span> pickle<span style="color: #333333">.</span>dumps(testing)
+      <span style="color: #008800; font-weight: bold">try</span>:
+          client<span style="color: #333333">.</span>s<span style="color: #333333">.</span>send(data_send)
+      <span style="color: #008800; font-weight: bold">except</span> socket<span style="color: #333333">.</span>error <span style="color: #008800; font-weight: bold">as</span> e:
+          <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(e))
   </pre></div>
   
       </div>
