@@ -136,7 +136,8 @@
               <p style="text-align: left;padding: 0px 30px;">
                 For ease of game design and object addition, each object was implemented as a class with uniquely defined member functions for each type of object. 
                 Functions which function on all objects in the same manner were defined below the object classes. 
-                Below is an in-depth description of each function and class.
+                Below is an in-depth description of each function and class. Note that each class has a draw member function that draws the objects at the correct
+                location on the screen.
               </p>
               <h4>Classes</h4>
               <p style="text-align: left;padding: 0px 40px;">
@@ -147,14 +148,15 @@
                   their environment, as well as to allow the environment to make changes to the hero. To determine where
                   to blit the character onto the screen, the character class has an x and y member field, which correspond
                   to the character's current x and y screen coordinates. To store the character's location relative to the 
-                  game map, the character class also has global_x and global_y member fields. These fields are most relevant
+                  game map, the character class also has <code>global_x</code> and <code>global_y</code> member fields. These fields are most relevant
                   when the character reaches the edge of the screen, and the screen must adjust so the character can 
-                  continue. Finally, the character needs to update their position when the move function is called. To
+                  continue. Because our demo only had one level that did did not extend beyond the edge of the screen, these fields 
+                  represent the character's starting position. Finally, the character needs to update their position when the move function is called. To
                   determine how much the position should be updated, the character has an x and y speed, which correspond
-                  to the number of pixels added to the x and y positions and global positions when the move function is called.
+                  to the number of pixels added to the x and y positions when the move function is called.
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  For determining the character's hit box, which is defined as the area wherin collisions will be detected,
+                  For determining the character's hitbox, which is defined as the area wherein collisions will be detected,
                   the character has a width and a height. These are both measured in pixels. The hitbox is stored as a four 
                   value tuple of the character's x, y, width, and height. These four parameters are all that is needed to 
                   determine the collision window, or hitbox. Width, height, and hitbox are all stored as member fields. 
@@ -163,7 +165,7 @@
                   To store the image used to display the character on the screen the character class has two member fields: 
                   a left image field and a right image field. This allows for the character to face the direction they are
                   moving, which is kept track of using the direction member field. In single player mode, these fields store 
-                  pygame image objects, but in the multiplayer version they store image directories for ease of file transfer. 
+                  pygame image objects, but in the multiplayer version they store image paths for ease of file transfer. 
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   The above mentioned member fields cover the basic necessities of displaying the character, keeping track of
@@ -175,61 +177,61 @@
                   has. This value can be modified when the character collides with certain objects, as will be discussed later.
                   The attack member field stores the attack value of the last weapon item the hero collided with, while the defense
                   member field stores the defense value of the last armor item the character collided with. The inventory member field 
-                  stores a list of the names of the items the character has collided with. Finally, the env_type 
+                  stores a list of the names of the items the character has collided with. Finally, the <code>env_type</code>
                   member field stores the environment type of the last item the hero collided with. The item, weapon and armor classes
                   will be discussed later in this section. 
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  The last member fields included in the character class are physics_on and signaling. physics_on stores an integer key 
+                  The last member fields included in the character class are <code>physics_on</code> and signaling. The field <code>physics_on</code> stores an integer key 
                   which will be used later in the collision function to determine how the object should react upon a collision. The signaling
                   member field was not implemented in the single player version, but would be used to indicate when the character is signaling
                   to the god player that they need an item to be dropped into the game.
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  To control the character, the member functions moveRight, moveLeft, jump, and stopMoving and implemented to update the appropriate
+                  To control the character, the member functions <code>moveRight</code>, <code>moveLeft</code>, <code>jump</code>, and <code>stopMoving</code> and implemented to update the appropriate
                   speed and direction member fields. The stop_signal and signal memner functions are meant as part of the multiplayer implementation, and toggle 
-                  the character's "signaling" field to 0 or 1. 
+                  the character's <code>signaling</code> field to 0 or 1. 
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
                 <b>Item</b>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  The item class includes an image, x, y, global_x, global_y, height, width, and physics_on much like the character class. It also has a speed_x and 
-                  speed_y, which would be set to the speed the background is moving when the character is pushing against the edge of the screen, and a health, which stores
+                  The item class includes an <code>image</code>, <code>x</code>, <code>y</code>, <code>global_x</code>, <code>global_y</code>, <code>height</code>, <code>width</code>, and <code>physics_on</code> much like the character class. It also has a <code>speed_x</code> and 
+                  <code>speed_y</code>, which would be set to the speed the background is moving when the character is pushing against the edge of the screen, and a <code>health</code>, which stores
                   the health delivered to the hero when the hero collides with the item. The item 
                   class is meant to store things that the hero can pick up, meaning objects of class item will dissappear or display on the character's person upon colliding with a character. This
-                  is accomplished through the member field "picked_up", which is initialized to False but is set to true in the collision function when the hero 
+                  is accomplished through the member field <code>picked_up</code>, which is initialized to <code>False</code> but is set to true in the collision function when the hero 
                   collided with that item.
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
                   An item's display after it is picked up is determined using the equippable member field. If an item is initialized with equippable set to True, 
                   logic in the member function draw will call draw_equipped and display the object on the body of the character that collides with it. Whether or not
-                  the item has collided with a character is stored in the boolean "picked_up" member field. 
+                  the item has collided with a character is stored in the boolean <code>picked_up</code> member field. 
                 </p>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
                 <b>Weapon</b>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  The weapon class is a child of the item class. From it's parent, the weapon class inherits the fields image, name, x, y, global_x, global_y, width, height, and equippable member fields.
-                  In addition to the weapon's parent class fields, it also stores an image_l and image_r so that it may be pointing the same way as the hero when the hero turns and the weapon is equipped. 
-                  Finally, the weapon has an attack parameter, the value of which will transfer to a character that collides with it. 
-                  In addition to the draw function, the weapon class has a draw_equipped function that draws the weapon in front of the character after the character has collided with it. 
+                  The weapon class is a child of the item class. From its parent, the weapon class inherits the fields <code>image</code>, <code>name</code>, <code>x</code>, <code>y</code>, <code>global_x</code>, global_y, width, height, and equippable member fields.
+                  In addition to the weapon's parent class fields, it also stores an <code>image_l</code> and <code>image_r</code> so that it may be pointing the same way as the hero when the hero turns and the weapon is equipped. 
+                  Finally, the weapon has an attack parameter, the value of which could transfer to a character that collides with it. We did not implement this since no attacks were demonstrated in the demo. 
+                  In addition to the draw function, the weapon class has a <code>draw_equipped</code> function that draws the weapon in front of the character after the character has collided with it. 
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
                 <b>Armor</b>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  The armor class is also a child of the item class, and is almost identical to the weapon class except that it has a defense field instead of an attack field, and it also has an env_type member field,
+                  The armor class is also a child of the item class, and is almost identical to the weapon class except that it has a defense field instead of an attack field which also was not used due to the lack of enemies in our demo, and it also has an <code>env_type</code> member field,
                   which it gives to the character that collides with it. 
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
                 <b>Obstacle</b>
                 </p>
                 <p style="text-align: left;padding: 0px 40px;">
-                  The obstacle class has the member fields x, y, global_x, global_y, width, height, hitbox, speeed_x, speed_y, env_type, image, and physics_on. This class is meant to hold stationary objects such as
+                  The obstacle class has the member fields <code>x</code>, <code>y</code>, <code>global_x</code>, <code>global_y</code>, <code>width</code>, <code>height</code>, <code>hitbox</code>, <code>speed_x</code>, <code>speed_y</code>, <code>env_type</code>, <code>image</code>, and <code>physics_on</code>. This class is meant to hold stationary objects such as
                   platforms that the character can jump on or needs to maneuver around. To prevent the object from being affected by gravity in the collision loop, "physics_on" is set to zero. The obstacle class also
-                  has an env_type, which would allows for micro-environments such as a platform of ice or one of hot coals that the hero has to additionally be equipped for.     
+                  has an env_type, which would allow for micro-environments to be implemented in the future such as a platform of ice or one of hot coals that the hero has to additionally be equipped for.     
                   </p>
                 <p style="text-align: left;padding: 0px 40px;">
                 <b>Environment</b>
@@ -237,8 +239,8 @@
                 <p style="text-align: left;padding: 0px 40px;">
                   The environment class is the only object that does not display on the screen, and is meant to create an invisible environment that the characters must be equipped for in order to avoid losing health. 
                   This class has a global_x position, an effect_length, a string "env_type", an attack, and a "physics_on" member field. Even though this object is not displayed, giving it a "physics_on" field allows it to be
-                  handled the same as the other objects when handling collisions. The "attack" field stores the amount of health that will be decremented from all characters within the range of the environment that are not 
-                  equipped for it. Note that environments of type "None" have attack 0, so a character equipped for a special environment can still enter a temperate one without needing to equip new armor. 
+                  handled the same as the other objects when handling collisions. The "attack" field stores an amount of health that could be decremented from all characters within the range of the environment that are not 
+                  equipped for it. Our demo implements this health decrement differently in the main logic, but a game with more environments would likely use this field. Environments of type <code>none</code> do not decrement character health. 
                 </p>
               </p>
               <h4>Non-Member Functions</h4>
@@ -247,7 +249,7 @@
               </p>
               <p style="text-align: left;padding: 0px 40px;">
                 The "Collide" function checks the passed list of objects for collisions in the passed direction, which is x or y. So if 'x' was passed as a direction, collide detects object collisions from objects moving horizontally,
-                and if 'y' was passed then it would both check for collisions in the y direction. Object collisions between each other are checked in a recursivle helper function called "find_collisions" that takes
+                and if 'y' was passed then it would both check for collisions in the y direction. Object collisions between each other are checked in a recursive helper function called "find_collisions" that takes
                 in the list of objects and returns a list of those that overlapped with another object's hitbox. Once the list of collided objects is returned, the main collide function handles object position adjustment in the appropriate
                 direction.
               </p>
@@ -265,15 +267,15 @@
                 <b>Redraw Window</b>
               </p>
               <p style="text-align: left;padding: 0px 40px;">
-                Redraw window handles clearning the screen and then blitting the objects and background onto the screen to allow for character animation. Redraw window also handles drawing of all the text on the screen. Objects are drawn by looping
-                the displayable objects list and calling each object's draw function. In this loop each object is also checked to see if it is an item, since the item's draw function takes the hero arguement in addition to the window arguement. 
+                Redraw window handles clearing the screen and then blitting the objects and background onto the screen to allow for character animation. Redraw window also handles drawing of all the text on the screen. Objects are drawn by looping
+                the displayable objects list and calling each object's draw function. In this loop each object is also checked to see if it is an item, since the item's draw function takes the hero argument in addition to the window argument. 
               </p>
               <p style="text-align: left;padding: 0px 40px;">
                 <b>Drop Item</b>
               </p>
               <p style="text-align: left;padding: 0px 40px;">
-                The drop item function, called "drop_item_noncb", takes no arguements and is called when the game changes state between the "god" and "hero" mode. If the captured object is in the list of recognized objects, this function initlialzes
-                the object and appends it to the displayable objects list so that it can be drawn in the follwing cycle. 
+                The drop item function, called "drop_item_noncb", takes no arguments and is called when the game changes state between the "god" and "hero" mode. If the captured object is in the list of recognized objects, this function initializes
+                the object and appends it to the displayable objects list so that it can be drawn in the following cycle. 
               </p>
               
               </p>
@@ -355,12 +357,12 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
                 should still be permitting movement, such as walking on the floor or jumping and hitting the side of a block. 
               </p>
               <p style="text-align: left;padding: 0px 30px;">
-                Object collision in either direction is also broken up into two steps: detecting the objects that collided, and updatinng the object position. The first is handled by a recursive helper funciton called find_collisions,
+                Object collision in either direction is also broken up into two steps: detecting the objects that collided, and updating the object position. The first is handled by a recursive helper funciton called find_collisions,
                 which takes an object list. Inside the function logic, the head object of the passed list is removed and compared with the remaining objects in the list. Any object found to collide with the initial object is removed from
                 the passed list and appended to a seperate collision list. If the initial object collided with anything in the list, it is also appended to the collision list after being compared with all other objects in the passed list. 
                 During these checks, the initial removed object is checked if it is a character or an item; if so, each subsequent object will be checked to determine if it is an item if the first object is a hero, or it will check to see if
-                the subsequent objects are a character if the first was an item. Given a character-item collision, the item's name field is added to the character's inventory field, and the item's "picked_up" field is set to true. The health 
-                field of the item is also added to the health field of the character. If item is an armor item, the character's "env_type" field is also updated to match that of the armor's "env_type" field. Once all of these checks are 
+                the subsequent objects are a character if the first was an item. Given a character-item collision, the item is added to the character's inventory field, and the item's "picked_up" field is set to true. The health 
+                field of a generic item is also added to the health field of the character. If item is an armor item, the character's "env_type" field is updated to match that of the armor's "env_type" field. Once all of these checks are 
                 finished and the objects have been added and removed from the appropriate lists, the function returns the list of collided objects plus a call to the helper function with the same list that was passed initially; since the
                 found collided objects have already been removed from this list, only objects for which a collision was not yet found will be checked. The base case is triggered when the passed list of objects is empty, wherin it returns 
                 list of collided objects. 
@@ -552,7 +554,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
               <p style="text-align: left;padding: 0px 30px;">
                 Our first attempt at an online connection was made by setting up port forwarding on Caeli's home router. Our hope was that by using the server's external IP instead of the local IP, we could use the local setup to connect two devices on different networks.
                 The port was opened and set to direct all incoming traffic to the local IP address of the laptop serving as the server host. Then, an exception to the firewall settings was made on that laptop to allow incoming traffic on the designated port. This method resulted
-                in a connection timeout error from the client script. Further probing using the website https://www.yougetsignal.com/tools/open-ports/ indicated that despite all efforts to open the port, the port was still closed. After this point we decided to try a different
+                in a connection timeout error from the client script. Further probing using this website <a href="https://www.yougetsignal.com/tools/open-ports/" target="_blank">yougetsignal</a> indicated that despite all efforts to open the port, the port was still closed. After this point we decided to try a different
                 approach that other students in the class seemed to be having success with.
               </p>
               <h4>Attempt 2: Host a server on a port on the class server</h4>
