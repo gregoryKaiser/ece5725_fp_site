@@ -91,7 +91,7 @@
               <h2>Introduction</h2>
               <p style="text-align: left;padding: 0px 30px;">
                 Playing adventure games is a lot of fun, especially when the world is so absorbing that one gets lost in the universe's rules and quirky limitations.
-                From the touchscreen of the original Nintendo DS, to the motion-controls of the Wii platform, however, there are a number of examples of novel user 
+                From the touchscreen of the original Nintendo&#174; DS&#8482;, to the motion-controls of the Wii&#8482; platform, however, there are a number of examples of novel user 
                 input that demonstrate its utility and potential for better user engagement. Along these lines, we wanted items in our game to be acquired by finding similar
                 items in real life that are recognized by a camera system. Thanks to recent developments in image processing and machine learning, we can use a lightweight 
                 object detection model to pick up on a limited set of real objects, and then spawn them for use by the character. We also attempted to make this project multiplayer by trying a few methods of data transfer over our home networks.
@@ -102,7 +102,7 @@
       <div style="text-align:center;">
               <h2>Design</h2>
               <p style="text-align: left;padding: 0px 30px;">
-                Our design for this project occurred mostly in software, where we tried to make an expandable platform for generic level creation.
+                Our design for this project occurred mostly in software, where we created an expandable platform for generic level creation.
                 Some changes were made in order to ensure that the camera was oriented correctly in-game, but we otherwise had very little trouble interfacing
                 with the camera module.
               </p>
@@ -110,7 +110,7 @@
               <p style="text-align: left;padding: 0px 30px;">
                 Though we originally had aspirations for a more interesting hardware setup, the end-product consists of just a RPi and camera module. The camera's 
                 ribbon cable is wrapped around the body of the RPi case and is mounted to its underside. The device is held in both hands, in a portrait orientation 
-                with the piTFT buttons on the right side.
+                with the PiTFT buttons on the right side.
                 <figure>
                 <img class="img-rounded" src="pics/rpi_front.jpg" alt="RPi front" style="width:40%;">
                 <img class="img-rounded" src="pics/rpi_back.jpg" alt="RPi front" style="width:40%;">
@@ -282,7 +282,7 @@
               <hr id='userinput'>
               <h4>User input</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                The piTFT provides the full user interface for a player. Two of the buttons are used for moving the character right and left, by 
+                The PiTFT provides the full user interface for a player. Two of the buttons are used for moving the character right and left, by 
                 triggering callback functions that call the character's movement member functions. These buttons are denoted by icons displayed next to them
                 on-screen. 
               </p>
@@ -314,12 +314,12 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
 <br>
               <p style="text-align: left;padding: 0px 30px;">  
                 The RPi.GPIO library is used to connect these buttons to their
-                functionality, and they are triggered using both the rising and falling edge of the button signal. This way, when the button is pressed down, the
+                functionality, and they are triggered using both the rising and falling edge of the button signal. This way, when the button is pressed, the
                 character moves in one direction, and when it is released, the character is halted. By tapping on the touchscreen, the character jumps in the air. This function is controlled through the main game logic where the touch event is detected through polling.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
-                Another piTFT button is used to trigger a callback function that switches control to the camera on the back of the device. This changes the game state to 
-                detect objects for the user to acquire in-game. The final button on the "top" of the piTFT (closest to the power source) is a simple quit button to allow the user to end the game entirely.
+                Another PiTFT button is used to trigger a callback function that switches control to the camera on the back of the device. This changes the game state to 
+                detect objects for the user to acquire in-game. The final button on the "top" of the PiTFT (closest to the power source) is a simple quit button to allow the user to end the game entirely.
               </p>
 <!-- HTML generated using hilite.me --><div style="text-align: left;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">switch_state</span>(channel):
     <span style="color: #008800; font-weight: bold">global</span> GAME_STATE
@@ -412,7 +412,7 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
 
               <h4>Wheezy downgrade</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                Because the update mentioned above causes issues when using Pygame to control the piTFT, the downgrade to Raspbian Wheezy performed in Lab 2 of ECE 5725 is repeated. These steps are also detailed on Adafruit's <a href="https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/pitft-pygame-tips" target="_blank">2.8'' PiTFT installation/use tutorial</a> which goes into some detail on the file changes required to use Pygame. A handy bash script there makes all of the necessary changes at once.<br><br>
+                Because the update mentioned above causes issues when using Pygame to control the PiTFT, the downgrade to Raspbian Wheezy performed in Lab 2 of ECE 5725 is repeated. These steps are also detailed on Adafruit's <a href="https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/pitft-pygame-tips" target="_blank">2.8'' PiTFT installation/use tutorial</a> which goes into some detail on the file changes required to use Pygame. A handy bash script there makes all of the necessary changes at once.<br><br>
                 Once the necessary file changes are made, the wheezy downgrade can be installed.
               </p>
 <!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo apt-get update</span>
@@ -424,11 +424,11 @@ GPIO<span style="color: #333333">.</span>add_event_detect(<span style="color: #0
 <!-- HTML generated using hilite.me --><div style="text-align: left; background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">sudo python3 game_and_detect_update.py --modeldir=Sample_TFLite_model --resolution=240x320</span>
 </pre></div><br>
               <p style="text-align: left;padding: 0px 30px;">
-                The <code>modeldir</code> argument points the script to the object detection model that one is using. The tutorial that we followed separated this from the main script such that custom models could be generated and stored in separate folders. This makes the system more modular, in case custom image-detection is developed. The <code>resolution</code> argument gives the resolution of the piTFT to the object detection script so that the camera image is scaled to fill the correct dimensions of the screen. These coordinates are also flipped (from 320x240) to compensate for the rotation of the camera before display, described in the section below.
+                The <code>modeldir</code> argument points the script to the object detection model that one is using. The tutorial that we followed separated this from the main script such that custom models could be generated and stored in separate folders. This makes the system more modular, in case custom image-detection is developed. The <code>resolution</code> argument gives the resolution of the PiTFT to the object detection script so that the camera image is scaled to fill the correct dimensions of the screen. These coordinates are also flipped (from 320x240) to compensate for the rotation of the camera before display, described in the section below.
               </p>
               <h4>Adapted to run on the piTFT screen</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                At first, we tried a different option for object detection which runs natively on the piTFT from <a href="https://learn.adafruit.com/running-tensorflow-lite-on-the-raspberry-pi-4?view=all" target="_blank">Adafruit</a>, but we found that the model was much less reliable on common objects, and had an extremely limited set of items compared to the tutorial described above. The critical flaw in the better model was that it crashed the RPi when trying to run on the piTFT using <code>cv2</code>. A workaround for this was required.
+                At first, we tried a different option for object detection which runs natively on the PiTFT from <a href="https://learn.adafruit.com/running-tensorflow-lite-on-the-raspberry-pi-4?view=all" target="_blank">Adafruit</a>, but we found that the model was much less reliable on common objects, and had an extremely limited set of items compared to the tutorial described above. The critical flaw in the better model was that it crashed the RPi when trying to run on the PiTFT using <code>cv2</code>. A workaround for this was required.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 The object detection section of our game is nearly identical to the tutorial script called <code>TFLite_detection_webcam.py</code>, with a few changes. One of the main changes is to switch from using the <code>cv2</code> library to display camera output, to using pygame to display to the piTFT. In order to do this, we found a great resource from a past <a href="https://courses.ece.cornell.edu/ece5990/ECE5990_Fall15_FinalProjects/Andre_Heil/ece5990_final_report/avh34_jr986.html" target="_blank">ECE 5990 student project</a> for a face-recognition system. They used the cv2 library to write to a temporary file, which is then read back in and displayed in the usual pygame fashion by blitting to the display surface and updating periodically. The frame itself is also rotated 90 degrees to match the orientation of the camera since it is wrapped around the side, instead of the top, of our RPi console.
@@ -494,7 +494,7 @@ recog_armor <span style="color: #333333">=</span> [<span style="background-color
               <h3>Main game logic and structure</h3>
               <h4>Game state-machine</h4>
               <p style="text-align: left;padding: 0px 30px;">
-                The game state machine cycles through just a few possible game states. The first is the title screen, which merely shows the title of the game in basic
+                The game state machine cycles through just a few possible game states. The first is the title screen, which shows the title of the game in basic
                 text near the middle of the piTFT. The second game state is the main playable section, with a moveable character, item acquisition, collision detection, and
                 environmental effects. The third game state is the object-detection phase, which is triggered when a user presses the appropriate button on the piTFT. This state
                 displays the camera's view on the piTFT and draws bounding boxes around detected objects in-frame using TensorFlow-Lite. Pressing the same button that triggered this state hands control back to the second game state, where the player gains control of their character again. Finally, the end screen state shows the "You Died" text, indicating that the game is lost. The end of the game is triggered by either 1) a loss of all of one's health or 2) falling off of the level 1 platform, and therefore off-screen. This game state also clear's the character's inventory in order to respawn the hero back onto the screen.<br><br>
@@ -544,11 +544,11 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 While the menu screen and the end title are not worth detailing here (they consist of a simple text render and pygame display), the <code>GAME_PLAY</code> and <code>OBJ_DETECT</code> states are worth a bit more explanation. The <code>GAME_PLAY</code> state relies on helper functions described in the <a href="#collisions">Collision Logic</a> section and defined in <code>classes.py</code>. After checking for a touch input, which triggers the hero's y-velocity to be set high, and after checking the environment against the hero's equipment (at a 3-second interval) to decrement health, the displayable objects are "moved" in the x direction based on their speed. Collisions due to this move are checked, and those movements are reversed if a collision occurs. They are then "moved" in the y-direction, checked for collisions, and reversed if necessary again. This effectively carries out the physics of our game, which first changes the position of the objects on-screen before showing that frame on the screen.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
-                The <code>OBJ_DETECT</code> phase follows the tutorial described in <a href="#objdetect">the object detection description</a> through the following process. First, a frame is taken from the video stream, which is an instance of a class designed by <a href="https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/" target="_blank">Adrian Rosebrock</a> of PyImageSearch. This frame is resized and normalized as a preparation step for feeding into the TFLite model before detection is "performed." The results are stored, along with bounding boxes around the detected objects. For all of these detections, the results of the detection are used to draw boxes around, and label, those objects which the model is over 50% confident are in-frame. The label of the first object is stored for our game script, and then the frame, with bounding boxes, is stored ina temporary file and re-displayed by pygame, as desribed earlier.
+                The <code>OBJ_DETECT</code> phase follows the tutorial described in <a href="#objdetect">the object detection description</a> through the following process. First, a frame is taken from the video stream, which is an instance of a class designed by <a href="https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/" target="_blank">Adrian Rosebrock</a> of PyImageSearch. This frame is resized and normalized as a preparation step for feeding into the TFLite model before detection is performed. The results are stored, along with bounding boxes around the detected objects. For all of these detections, the results of the detection are used to draw boxes around, and label, those objects which the model is over 50% confident are in-frame. The label of the first object is stored for our game script, and then the frame, with bounding boxes, is stored ina temporary file and re-displayed by pygame, as desribed earlier.
               </p>
               <h3>Remote Connection Attempts</h3>
               <p style="text-align: left;padding: 0px 30px;">
-                To expand the game to be a multiplayer experience, we tried multiple different methods which relied on the same basic example script that we wanted to adapt to our purposes. We tried to follow a set of tutorials from someone named TechWithTim, who maintains a website and a set of YouTube videos that detail the creation of web server and client python scripts. Our strategy was to run these examples to establish a connection first, and then adapt the game to work over the confirmed connection. The scripts use the <code>socket</code> and <code>pickle</code> libraries to connect two machines together.
+                To expand the game to be a multiplayer experience, we tried multiple different methods which relied on the same basic example script that we wanted to adapt to our purposes. We tried to follow a set of tutorials from a the youtuber TechWithTim, who maintains a website and a set of YouTube videos that detail the creation of web server and client python scripts. Our strategy was to run these examples to establish a connection first, and then adapt the game to work over the confirmed connection. The scripts use the <code>socket</code> and <code>pickle</code> libraries to connect two machines together.
               </p>
               <h4>Attempt 1: Opening a port on a home network</h4>
               <p style="text-align: left;padding: 0px 30px;">
@@ -587,7 +587,7 @@ MENU_SCREEN <span style="color: #333333">=</span> <span style="color: #0000DD; f
                 The last option was an attempt to, at the very least, show what our intent was with respect to packaging game data. The examples from TechWithTim were good, but were quite simplistic, including a game that transferred the positions of two red boxes on-screen in a small and very specific format. To pack our entire set of displayable game objects and send them over a network, we decided to use the pickle library. By following some online examples, as well as a very valuable forum post, we generated three scripts that run a single client-server line of communication. 
               </p>
               <p style="text-align: left;padding: 0px 30px;">
-                The <code>desktop_server.py</code> script creates a custom <code>Server</code> object to collect game data and display it in a window. It waits for a connection to a client, continuously recieves game data, and merely shows where those objects are on-screen, without the ability to control them.
+                The <code>desktop_server.py</code> script creates a custom <code>Server</code> object to collect game data and display it in a window. It waits for a connection to a client, continuously recieves game data, and simply shows where those objects are on-screen, without the ability to control them.
               </p>
               <p style="text-align: left;padding: 0px 30px;">
                 The <code>desktop_client.py</code> script creates a custom <code>Client</code> object which connects a desktop version of our game in a primitive form. User input is adapted to allow the use of the keyboard to move the player, and all game logic is performed locally in this script. At the end of a frame, <code>pickle</code> is used to package and send the entire displayable objects list to the server for display on the other end.  
